@@ -16,4 +16,3 @@ netstat -tn 2>/dev/null | grep ":$port " | awk '{print $5}' | cut -d: -f1 | sort
     location=$(geoiplookup "$ip" | awk -F': ' '{print $2}')
     echo "$ip ($location)"
 done
-123
