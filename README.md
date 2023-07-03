@@ -15,9 +15,6 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/d
 
 安装最新 Node.js 版本
 ```bash 
-sudo apt update \
-&& sudo apt install npm -y \
-&& sudo npm install -g n \
-&& sudo n latest \
+sudo apt update && sudo apt install npm -y && sudo npm install -g n && sudo n latest \
 && node -v
 ```
