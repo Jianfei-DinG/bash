@@ -7,17 +7,18 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/u
 ```
 bash <(curl -s -L https://git.io/JDkrf)
 ```
-
+<hr style="border: none; height: 1px; background-color: green;">
 docker + docker-compose 一键安装脚本
 ```bash 
 bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/docker.sh)
 ```
-
+<hr style="border: none; height: 1px; background-color: green;">
 安装最新 Node.js 版本
 ```bash 
 sudo apt update && sudo apt install npm -y && sudo npm install -g n && sudo n latest \
 && node -v
 ```
+<hr style="border: none; height: 1px; background-color: green;">
 开启BBR
 ```bash
 echo net.core.default_qdisc=fq >> /etc/sysctl.conf \
@@ -28,9 +29,6 @@ echo net.core.default_qdisc=fq >> /etc/sysctl.conf \
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
-<p style="border-bottom: 1px solid green;"></p>
-
-<div style="background-color: green; height: 2px;"></div>
 
 
 
