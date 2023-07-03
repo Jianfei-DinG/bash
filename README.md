@@ -7,3 +7,8 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/u
 ```
 bash <(curl -s -L https://git.io/JDkrf)
 ```
+
+docker + docker-compose 一键安装脚本
+```bash 
+bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/docker.sh)
+```
