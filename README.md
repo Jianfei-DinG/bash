@@ -26,5 +26,6 @@ echo net.core.default_qdisc=fq >> /etc/sysctl.conf \
 && sysctl net.ipv4.tcp_available_congestion_control \
 && lsmod | grep bbr
 ```
+<hr style="border: none; height: 1px; background-color: green;">
 
 
