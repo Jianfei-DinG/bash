@@ -18,3 +18,13 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/d
 sudo apt update && sudo apt install npm -y && sudo npm install -g n && sudo n latest \
 && node -v
 ```
+开启BBR
+```bash
+echo net.core.default_qdisc=fq >> /etc/sysctl.conf \
+&& echo net.ipv4.tcp_congestion_control=bbr >> /etc/sysctl.conf \
+&& sysctl -p \
+&& sysctl net.ipv4.tcp_available_congestion_control \
+&& lsmod | grep bbr
+```
+
+
