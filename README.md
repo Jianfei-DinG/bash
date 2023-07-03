@@ -28,4 +28,9 @@ echo net.core.default_qdisc=fq >> /etc/sysctl.conf \
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
+<p style="border-bottom: 1px solid green;"></p>
+
+<div style="background-color: green; height: 2px;"></div>
+
+
 
