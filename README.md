@@ -34,9 +34,9 @@ echo net.core.default_qdisc=fq >> /etc/sysctl.conf \
 
 修改系统时区
 ```bash
-sudo timedatectl set-timezone Asia/Shanghai
-sudo systemctl restart systemd-timesyncd
-timedatectl
-date
+sudo timedatectl set-timezone Asia/Shanghai \
+&& sudo systemctl restart systemd-timesyncd \
+&& timedatectl \
+&& date
 ```
 <hr style="border: none; height: 1px; background-color: green;">
