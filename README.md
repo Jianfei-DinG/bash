@@ -1,3 +1,6 @@
+<img src="[ubuntu.png](https://github.com/Joshua-DinG/bash/blob/main/ubuntu.png)" width = "100%" height = "100%" div align=center />
+
+
 # bash
 Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 正在完事中....
