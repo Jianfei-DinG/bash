@@ -1,4 +1,4 @@
-<img src="[ubuntu.png](https://github.com/Joshua-DinG/bash/blob/main/ubuntu.png)" width = "100%" height = "100%" div align=center />
+<img src="https://cdn.jsdelivr.net/gh/Dtyyyyyy/PicGoIMG/img/ubuntu.png" width = "100%" height = "100%" div align=center />
 
 
 # bash
