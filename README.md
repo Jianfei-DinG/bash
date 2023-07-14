@@ -40,3 +40,13 @@ sudo timedatectl set-timezone Asia/Shanghai \
 && date
 ```
 <hr style="border: none; height: 1px; background-color: green;">
+ssh-keygen 在CMD 创建服务端的隧道链接
+ssh-keygen -t rsa  默认的协议
+```bash
+ssh-keygen -f %USERPROFILE%\.ssh\ding    #生成ding的秘钥
+type %USERPROFILE%\.ssh\ding.pub | ssh ding@192.168.2.156 "mkdir -p ~/.ssh && cat >> ~/.ssh/authorized_keys"   #发布到服务端
+ssh -i %USERPROFILE%\.ssh\ding ding@192.168.2.156    #CMD登录
+ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
+```
+<hr style="border: none; height: 1px; background-color: green;">
+
