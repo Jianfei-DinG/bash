@@ -40,6 +40,7 @@ sudo timedatectl set-timezone Asia/Shanghai \
 && date
 ```
 <hr style="border: none; height: 1px; background-color: green;">
+
 ssh-keygen 在CMD 创建服务端的隧道链接
 ssh-keygen -t rsa  默认的协议
 ```bash
