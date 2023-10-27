@@ -54,3 +54,12 @@ ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
+Python3缩短为py
+```bash
+nano ~/.bashrc         #打开.bashrc
+alias py='python3'     #添加缩短语句
+source ~/.bashrc       #重新加载
+py your_script.py      #运行
+py --version       #查版本号
+```
+<hr style="border: none; height: 1px; background-color: green;">
