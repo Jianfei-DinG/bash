@@ -54,7 +54,7 @@ ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
-Python3缩短为py
+Python3 缩短为 py
 ```bash
 nano ~/.bashrc         #打开.bashrc
 alias py='python3'     #添加缩短语句
