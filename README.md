@@ -57,7 +57,7 @@ ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
 Python3 缩短为 py
 ```bash
 cat >> ~/.bashrc <<EOL
-alias py='python3'
+alias py3='python3'
 EOL
 
 source ~/.bashrc       #重新加载
