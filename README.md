@@ -54,6 +54,32 @@ ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
+docker-compose.yml mysql
+```bash
+version: '3.1'
+services:
+  db:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: xinmima2018
+    ports:
+      - 3306:3306  # 添加端口映射
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+```
+```bash
+docker-compose up -d
+
+```
+<hr style="border: none; height: 1px; background-color: green;">
 Python3 缩短为 py
 ```bash
 cat >> ~/.bashrc <<EOL
@@ -65,3 +91,5 @@ py your_script.py      #运行
 py --version       #查版本号
 ```
 <hr style="border: none; height: 1px; background-color: green;">
+
+
