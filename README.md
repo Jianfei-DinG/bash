@@ -76,10 +76,11 @@ services:
       - 8080:8080
 ```
 ```bash
-docker-compose up -d
+docker-compose up -d  # 后台运行
 
 ```
 <hr style="border: none; height: 1px; background-color: green;">
+
 Python3 缩短为 py
 ```bash
 cat >> ~/.bashrc <<EOL
