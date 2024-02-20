@@ -24,7 +24,6 @@ else
     echo "docker-compose 已安装，跳过安装步骤。"
 fi
 
-# 更换 Docker 镜像加速器
 echo "开始更换 Docker 镜像加速器..."
 if [ ! -f /etc/docker/daemon.json ]; then
     echo "{\"registry-mirrors\": [" | sudo tee /etc/docker/daemon.json
@@ -34,9 +33,9 @@ fi
 
 # 添加镜像加速器地址
 echo '    "https://d8b3zdiw.mirror.aliyuncs.com",' | sudo tee -a /etc/docker/daemon.json
-echo '    "https://reg-mirror.qiniu.com/",' | sudo tee -a /etc/docker/daemon.json
-echo '    "https://hub-mirror.c.163.com/",' | sudo tee -a /etc/docker/daemon.json
-echo '    "https://docker.mirrors.ustc.edu.cn/"' | sudo tee -a /etc/docker/daemon.json
+echo '    "https://reg-mirror.qiniu.com",' | sudo tee -a /etc/docker/daemon.json
+echo '    "https://hub-mirror.c.163.com",' | sudo tee -a /etc/docker/daemon.json
+echo '    "https://docker.mirrors.ustc.edu.cn"' | sudo tee -a /etc/docker/daemon.json
 
 # 完成 JSON 格式
 echo "]}" | sudo tee -a /etc/docker/daemon.json
