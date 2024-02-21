@@ -83,7 +83,7 @@ docker-compose exec db /bin/bash  #进入容器
 docker cp mysql-db-1:/var/lib/mysql $(pwd)/data  #将数据复制到当前目录的data下
 docker-compose cp db:/var/lib/mysql $(pwd)
 docker-compose cp <服务名称>:<容器内路径> <本地目录>
-
+find /home/ding/ -type f -name "docker-compose.yml" -execdir docker-compose ps \;  #查找目录下的所有 docker-compose.yml 并显示运行状态
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
