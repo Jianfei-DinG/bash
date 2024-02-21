@@ -77,6 +77,8 @@ services:
 ```
 ```bash
 docker-compose up -d  # 后台运行
+/var/lib/mysql  #容器里的数据目录
+docker cp mysql-db-1:/var/lib/mysql $(pwd)/data  #将数据复制到当前目录的data下
 
 ```
 <hr style="border: none; height: 1px; background-color: green;">
