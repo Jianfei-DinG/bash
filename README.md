@@ -79,7 +79,10 @@ services:
 docker-compose up -d  # 后台运行
 docker-compose ps  #查看运行状态
 /var/lib/mysql  #容器里的数据目录
+docker-compose exec db /bin/bash  #进入容器
 docker cp mysql-db-1:/var/lib/mysql $(pwd)/data  #将数据复制到当前目录的data下
+docker-compose cp db:/var/lib/mysql $(pwd)
+docker-compose cp <服务名称>:<容器内路径> <本地目录>
 
 ```
 <hr style="border: none; height: 1px; background-color: green;">
