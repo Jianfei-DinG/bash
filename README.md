@@ -100,6 +100,7 @@ source ~/.bashrc       #重新加载
 py your_script.py      #运行
 py --version       #查版本号
 ```
+Flask 环境安装
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y pkg-config && \
