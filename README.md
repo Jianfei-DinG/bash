@@ -100,6 +100,13 @@ source ~/.bashrc       #重新加载
 py your_script.py      #运行
 py --version       #查版本号
 ```
+```bash
+sudo apt-get update && \
+sudo apt-get install -y pkg-config && \
+sudo apt-get install -y libmysqlclient-dev && \
+pip install flask Flask Flask-RESTful flask_sqlalchemy mysqlclient pymysql
+
+```
 <hr style="border: none; height: 1px; background-color: green;">
 
 
