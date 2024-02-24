@@ -1,4 +1,4 @@
-Flask 环境安装
+#Flask 环境安装
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y pkg-config && \
@@ -9,7 +9,8 @@ pip install flask Flask Flask-RESTful flask_sqlalchemy mysqlclient pymysql
 pip install -r requirements.txt
 ```
 <hr style="border: none; height: 1px; background-color: green;">
-API 配置
+
+#API 配置
 
 ```bash
 from flask import Flask, request
