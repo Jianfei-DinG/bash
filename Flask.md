@@ -10,6 +10,7 @@ pip install -r requirements.txt
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 API 配置
+
 ```bash
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
