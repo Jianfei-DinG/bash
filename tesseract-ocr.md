@@ -1,3 +1,18 @@
+环境
+```bash
+-------------------------------------Tesseract OCR----------
+pip install flask pytesseract Pillow
+sudo apt-get install tesseract-ocr
+pip install opencv-python
+sudo apt-get install libgl1-mesa-glx
+pip uninstall opencv-python
+pip install opencv-python
+pip install opencv-python pytesseract
+语言文件 https://github.com/tesseract-ocr/tessdata
+-----------------------------------------------
+```
+
+<hr>
 Tesseract-OCR
 ```
 from flask import Flask, render_template, request, redirect
