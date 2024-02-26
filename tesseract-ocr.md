@@ -11,8 +11,8 @@ pip install opencv-python pytesseract
 语言文件 https://github.com/tesseract-ocr/tessdata
 -----------------------------------------------
 ```
-
 <hr>
+
 Tesseract-OCR
 ```
 from flask import Flask, render_template, request, redirect
@@ -101,3 +101,44 @@ if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5600, debug=True)
 
 ```
+<hr>
+
+index.html
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Text Extraction</title>
+</head>
+<body>
+    <h1>图片文字提取</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".png, .jpg, .jpeg"> <!--  accept 属性用于指定允许上传的文件类型内容 -->
+        <button type="submit">上传</button>
+    </form>
+</body>
+</html>
+
+```
+<hr>
+
+result.html
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extraction Result</title>
+</head>
+<body>
+    <h1>提取结果</h1>
+    <p>{{ text }}</p>
+</body>
+</html>
+
+```
+<hr>
