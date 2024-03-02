@@ -67,13 +67,13 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: xinmima2018
     ports:
-      - 3306:3306  # 添加端口映射
+      - 0.0.0.0:3306:3306  # 添加端口映射
 
   adminer:
     image: adminer
     restart: always
     ports:
-      - 8080:8080
+      - 0.0.0.0:8080:8080
 ```
 ```bash
 docker-compose up -d  # 后台运行
