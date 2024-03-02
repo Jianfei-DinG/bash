@@ -14,7 +14,9 @@ if ! command -v docker-compose &> /dev/null; then
     echo "docker-compose 未安装，开始安装..."
     if curl -Is https://www.baidu.com | grep "200 OK" > /dev/null; then
         echo "检测到服务器位于国内，使用国内镜像下载 docker-compose。"
-        curl -L "https://ghproxy.com/https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+       # curl -L "https://ghproxy.com/https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+       # curl -L "https://mirror.azure.cn/github-release/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+        curl -L "https://cdn.jsdelivr.net/gh/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
     else
         echo "检测到服务器位于国外，使用官方镜像下载 docker-compose。"
         sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
