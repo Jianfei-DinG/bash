@@ -16,9 +16,9 @@ bash <(curl -s -L https://git.io/JDkrf)
 ```python
 def hello_world():
     print("Hello, World!")
-
-</details>
 ```
+</details>
+
 
 <hr style="border: none; height: 1px; background-color: green;">
 
