@@ -80,7 +80,8 @@ ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
-docker-compose.yml mysql
+<details>
+<summary>docker-compose.yml mysql</summary>
 ```bash
 version: '3.1'
 services:
@@ -116,6 +117,7 @@ find /home/ding/ -type f -name "docker-compose.yml" -execdir docker-compose ps \
 docker-compose down -v   #停止并删除卷
 docker-compose down --volumes
 ```
+<details>
 <hr style="border: none; height: 1px; background-color: green;">
 
 Python3 缩短为 py
