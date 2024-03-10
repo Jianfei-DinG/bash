@@ -19,7 +19,9 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/d
 <hr style="border: none; height: 1px; background-color: green;">
 
 安装最新 Node.js 版本
+
 Node.js v21.x
+
 使用Ubuntu
 ```
 curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
@@ -30,6 +32,8 @@ sudo apt-get install -y nodejs
 curl -fsSL https://deb.nodesource.com/setup_21.x | bash - &&\
 apt-get install -y nodejs
 ```
+文档： https://github.com/nodesource/distributions
+
 ```bash 
 sudo apt update && sudo apt install npm -y && sudo npm install -g n && sudo n latest \
 && node -v
