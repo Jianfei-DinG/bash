@@ -12,9 +12,11 @@ bash <(curl -s -L https://git.io/JDkrf)
 ```
 <details>
   <summary>点击这里查看折叠内容</summary>
+
 ```python
 def hello_world():
     print("Hello, World!")
+
 </details>
 ```
 
