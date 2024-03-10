@@ -12,8 +12,9 @@ bash <(curl -s -L https://git.io/JDkrf)
 ```
 <details>
   <summary>点击这里查看折叠内容</summary>
-```
-  这里是折叠的内容，可以包含任何Markdown格式的文本、图像、链接等。
+```python
+def hello_world():
+    print("Hello, World!")
 </details>
 ```
 
