@@ -118,7 +118,7 @@ find /home/ding/ -type f -name "docker-compose.yml" -execdir docker-compose ps \
 docker-compose down -v   #停止并删除卷
 docker-compose down --volumes
 ```
-<details>
+</details>
   
 <hr style="border: none; height: 1px; background-color: green;">
 
