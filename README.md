@@ -20,19 +20,20 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/d
 
 安装最新 Node.js 版本
 
-Node.js v21.x
+Node.js v20.x
 
 使用Ubuntu
 ```
-curl -fsSL https://deb.nodesource.com/setup_21.x | sudo -E bash - &&\
+curl -fsSL https://deb.nodesource.com/setup_20.x | sudo -E bash - &&\
 sudo apt-get install -y nodejs
 ```
 以 root 身份使用 Debian
 ```
-curl -fsSL https://deb.nodesource.com/setup_21.x | bash - &&\
+curl -fsSL https://deb.nodesource.com/setup_20.x | bash - &&\
 apt-get install -y nodejs
 ```
-文档： https://github.com/nodesource/distributions
+官方文档： https://github.com/nodesource/distributions
+官方库：https://deb.nodesource.com/
 
 ```bash 
 sudo apt update && sudo apt install npm -y && sudo npm install -g n && sudo n latest \
