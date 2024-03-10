@@ -10,6 +10,14 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/u
 ```
 bash <(curl -s -L https://git.io/JDkrf)
 ```
+<details>
+  <summary>点击这里查看折叠内容</summary>
+
+  这里是折叠的内容，可以包含任何Markdown格式的文本、图像、链接等。
+
+</details>
+
+
 <hr style="border: none; height: 1px; background-color: green;">
 
 docker + docker-compose 一键安装脚本
