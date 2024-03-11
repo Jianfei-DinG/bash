@@ -11,7 +11,7 @@ Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 > bash <(curl -s -L https://git.io/JDkrf)
 ```
 <details>
-  <summary>点击这里查看折叠内容</summary>
+  > <summary>点击这里查看折叠内容</summary>
 
 ```
 def hello_world():
