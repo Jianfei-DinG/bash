@@ -24,6 +24,10 @@ def hello_world():
 
 docker + docker-compose 一键安装脚本
 ```bash 
+sudo curl -fsSL https://get.docker.com | sh && sudo ln -s /usr/libexec/docker/cli-plugins/docker-compose /usr/local/bin/docker-compose && docker --version && docker-compose --version
+```
+
+```bash 
 bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/docker.sh)
 ```
 <hr style="border: none; height: 1px; background-color: green;">
