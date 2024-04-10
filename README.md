@@ -54,6 +54,15 @@ services:
     restart: always
     ports:
       - 0.0.0.0:8080:8080
+###########################################################################
+#同时宿主机时间
+    environment:
+      SET_CONTAINER_TIMEZONE: true
+      CONTAINER_TIMEZONE: Asia/Shanghai
+    volumes:
+      - /etc/localtime:/etc/localtime:ro  #宿主机的时区信息映射到容器内，确保容器使用的时区与宿主机相同
+
+CST 代表是中国时区
 ```
 ```bash
 docker-compose up -d  # 后台运行
