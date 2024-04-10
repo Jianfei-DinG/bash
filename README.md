@@ -30,6 +30,47 @@ sudo curl -fsSL https://get.docker.com | sh && sudo ln -s /usr/libexec/docker/cl
 ```bash 
 bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/docker.sh)
 ```
+
+<details>
+<summary>docker-compose.yml mysql</summary>
+  
+```bash
+version: '3.1'
+services:
+  db:
+    image: mysql
+    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
+    # (this is just an example, not intended to be a production configuration)
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: xinmima2018
+      TZ: Asia/Shanghai  # 设置时区为上海时区
+    ports:
+      - 0.0.0.0:3306:3306  # 添加端口映射
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 0.0.0.0:8080:8080
+```
+```bash
+docker-compose up -d  # 后台运行
+docker-compose ps  #查看运行状态
+docker-compose down -v #清除所有容器和卷
+docker volume prune #清除不再使用的 Docker 卷而不删除容器
+/var/lib/mysql  #容器里的数据目录
+docker-compose exec db /bin/bash  #进入容器
+docker cp mysql-db-1:/var/lib/mysql $(pwd)/data  #将数据复制到当前目录的data下
+docker-compose cp db:/var/lib/mysql $(pwd)
+docker-compose cp <服务名称>:<容器内路径> <本地目录>
+find /home/ding/ -type f -name "docker-compose.yml" -execdir docker-compose ps \;  #查找目录下的所有 docker-compose.yml 并显示运行状态
+
+docker-compose down -v   #停止并删除卷
+docker-compose down --volumes
+```
+</details>
 <hr style="border: none; height: 1px; background-color: green;">
 
 安装最新 Node.js 版本
@@ -84,45 +125,7 @@ ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
 ```
 <hr style="border: none; height: 1px; background-color: green;">
 
-<details>
-<summary>docker-compose.yml mysql</summary>
-  
-```bash
-version: '3.1'
-services:
-  db:
-    image: mysql
-    # NOTE: use of "mysql_native_password" is not recommended: https://dev.mysql.com/doc/refman/8.0/en/upgrading-from-previous-series.html#upgrade-caching-sha2-password
-    # (this is just an example, not intended to be a production configuration)
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: xinmima2018
-    ports:
-      - 0.0.0.0:3306:3306  # 添加端口映射
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 0.0.0.0:8080:8080
-```
-```bash
-docker-compose up -d  # 后台运行
-docker-compose ps  #查看运行状态
-docker-compose down -v #清除所有容器和卷
-docker volume prune #清除不再使用的 Docker 卷而不删除容器
-/var/lib/mysql  #容器里的数据目录
-docker-compose exec db /bin/bash  #进入容器
-docker cp mysql-db-1:/var/lib/mysql $(pwd)/data  #将数据复制到当前目录的data下
-docker-compose cp db:/var/lib/mysql $(pwd)
-docker-compose cp <服务名称>:<容器内路径> <本地目录>
-find /home/ding/ -type f -name "docker-compose.yml" -execdir docker-compose ps \;  #查找目录下的所有 docker-compose.yml 并显示运行状态
-
-docker-compose down -v   #停止并删除卷
-docker-compose down --volumes
-```
-</details>
   
 <hr style="border: none; height: 1px; background-color: green;">
 
