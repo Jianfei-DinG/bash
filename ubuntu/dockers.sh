@@ -19,7 +19,7 @@ if ! command -v docker-compose &> /dev/null; then
         curl -L "https://cdn.jsdelivr.net/gh/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
     else
         echo "检测到服务器位于国外，使用官方镜像下载 docker-compose。"
-        sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+        sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
     fi
     echo "docker-compose 安装完成！"
 else
