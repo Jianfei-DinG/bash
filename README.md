@@ -67,6 +67,9 @@ CST 代表是中国时区
 docker-compose up -d  # 后台运行
 docker-compose ps  #查看运行状态
 docker-compose down -v #清除所有容器和卷
+docker images     #列出所有本地的 Docker 镜像
+docker rmi my_image <image_id> #删除指定的镜像
+
 docker volume prune #清除不再使用的 Docker 卷而不删除容器
 /var/lib/mysql  #容器里的数据目录
 docker-compose exec db /bin/bash  #进入容器
