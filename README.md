@@ -11,11 +11,11 @@ Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 > bash <(curl -s -L https://git.io/JDkrf)
 ```
 <details>
-  > <summary>点击这里查看折叠内容</summary>
+  > <summary>UDP端口封装在TCP端口上通信</summary>
 
 ```
-def hello_world():
-    print("Hello, World!")
+socat TCP-LISTEN:51820,reuseaddr,fork UDP:127.0.0.1:51820
+
 ```
 </details>
 
