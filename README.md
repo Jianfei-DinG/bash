@@ -15,7 +15,6 @@ Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 
 ```
 socat TCP-LISTEN:51820,reuseaddr,fork UDP:127.0.0.1:51820
-
 ```
 </details>
 
