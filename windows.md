@@ -13,6 +13,8 @@ winget   #软件包管理器的机制
 winget --version   #版本号
 winget search <软件名称>  #搜索软件
 winget install <软件名称>  #安装软件
+winget uninstall <软件名称或ID> #执行卸载命令
+
 
 ipconfig /flushdns    #刷新 DNS 缓存,清空本地 DNS 缓存，删除先前存储的 DNS 记录。
 netsh winsock reset   #重置 Winsock 目录。Winsock 是 Windows 中用于处理网络通信的 API，有时重置它可以解决网络连接问题。
