@@ -17,6 +17,9 @@ winget search <软件名称>  #搜索软件
 winget install <软件名称>  #安装软件
 winget uninstall <软件名称或ID> #执行卸载命令
 
+列出所有环境变量
+Get-ItemProperty -Path "HKCU:Environment"   #PowerShell 查看
+echo %PATH%  #cmd查看
 
 ipconfig /flushdns    #刷新 DNS 缓存,清空本地 DNS 缓存，删除先前存储的 DNS 记录。
 netsh winsock reset   #重置 Winsock 目录。Winsock 是 Windows 中用于处理网络通信的 API，有时重置它可以解决网络连接问题。
