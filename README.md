@@ -1,6 +1,15 @@
 <img src="https://cdn.jsdelivr.net/gh/Dtyyyyyy/PicGoIMG/img/ubuntu.png" width = "100%" height = "100%" div align=center />
 
 
+
+<dialog id="dialog">
+  <p>This is a dialog window</p>
+  <button onclick="document.getElementById('dialog').close()">Close</button>
+</dialog>
+
+<button onclick="document.getElementById('dialog').showModal()">Open Dialog</button>
+
+
 # bash
 Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 正在完事中....
