@@ -84,6 +84,11 @@ find /home/ding/ -type f -name "docker-compose.yml" -execdir docker-compose ps \
 
 docker-compose down -v   #停止并删除卷
 docker-compose down --volumes
+
+下面这两个可以清除所有镜像容器
+docker-compose down --rmi all
+docker system prune -af
+
 ```
 </details>
 <hr style="border: none; height: 1px; background-color: green;">
