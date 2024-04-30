@@ -64,7 +64,7 @@ services:
 CST 代表是中国时区
 ```
 ```bash
-docker-compose up -d  # 后台运行
+sudo docker compose up -d  # 后台运行
 docker-compose ps  #查看运行状态
 docker-compose down -v #清除所有容器和卷
 docker images     #列出所有本地的 Docker 镜像
