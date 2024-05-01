@@ -42,6 +42,7 @@ deb http://security.ubuntu.com/ubuntu/ jammy-security main restricted universe m
 # # deb-src https://mirrors.bfsu.edu.cn/ubuntu/ jammy-proposed main restricted universe multiverse
 EOF
 ```
+'-a' 选项告诉 tee 命令将输出追加到文件末尾而不是覆盖原有内容,如果覆盖把 '-a' 去掉就行。
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
