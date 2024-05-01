@@ -1,5 +1,6 @@
+<img src="https://cdn.jsdelivr.net/gh/Dtyyyyyy/PicGoIMG/img/ubuntu.png" width = "100%" height = "100%" div align=center />
 
-
+<hr style="border: none; height: 1px; background-color: green;">
 <details>
   <summary>Ubuntu22配置静态IP</summary>
 
