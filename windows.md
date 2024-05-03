@@ -1,5 +1,22 @@
 windows 命令
 
+
+<hr style="border: none; height: 1px; background-color: green;">
+<details>
+  <summary>制作命令</summary>
+
+  
+在 `C:\Windows\System32` 中新建一个 `pcmd.bat` 并在里面写 上下面的内容
+```
+@echo off
+powershell %*
+
+```
+这样在运行中输入`pcmd` 就 运行 PowerShell 了
+</details>
+
+<hr style="border: none; height: 1px; background-color: green;">
+
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
   <summary>文件里的字节搜索</summary>
