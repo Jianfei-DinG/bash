@@ -83,7 +83,8 @@ Requires=mysql.service    #它告诉 systemd 必须先启动 mysql.service ，�
 
 [Service]
 Type=exec      # 指定服务的执行方式
-User=dty       # 指定服务的执行用户 必须存在
+User=dty       # 指定服务的执行用户必须存在 输入`getent passwd | cut -d: -f1` 查看
+
 ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver   # 指定服务的启动命令
 
 [Install]
