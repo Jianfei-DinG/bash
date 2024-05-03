@@ -69,3 +69,51 @@ EOF
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
+
+<details>
+  <summary>systemctl 配置service 自动启动服务</summary>
+
+```
+[Unit]    
+Description=世界服务器   # 描述服务的用途
+
+After=network.target mysql.service   # 指定服务的启动顺序
+Requires=mysql.service
+
+[Service]
+Type=exec      # 指定服务的执行方式
+User=dty       # 指定服务的执行用户
+ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver   # 指定服务的启动命令
+
+[Install]
+WantedBy=multi-user.target  # 指定服务的安装位置
+```
+
+一键配置
+```
+sudo tee /etc/systemd/system/ac.service >/dev/null <<EOF
+[Unit]
+Description=世界服务器
+After=network.target mysql.service
+Requires=mysql.service
+[Service]
+Type=exec
+User=dty
+ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver
+[Install]
+WantedBy=multi-user.target
+EOF
+```
+
+执行命令
+```
+sudo systemctl daemon-reload   #重新加载 systemd 配置
+sudo systemctl restart ac.service  #重启服务应用新的配置
+sudo systemctl enable ac.service  #设置服务开机自启动
+
+systemctl status ac.service  #查看状态
+systemctl list-unit-files   #查看服务是否开机启动列表
+```
+</details>
+
+<hr style="border: none; height: 1px; background-color: green;">
