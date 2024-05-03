@@ -72,21 +72,23 @@ EOF
 
 <details>
   <summary>systemctl 配置service 自动启动服务</summary>
-
+  
+注释明细
 ```
 [Unit]    
 Description=世界服务器   # 描述服务的用途
 
-After=network.target mysql.service   # 指定服务的启动顺序
-Requires=mysql.service
+After=network.target mysql.service   # 指定服务的启动顺序，确保已经启动了才启动下一个服务。
+Requires=mysql.service    #它告诉 systemd 必须先启动 mysql.service ，成功后才能启动本程序
 
 [Service]
 Type=exec      # 指定服务的执行方式
-User=dty       # 指定服务的执行用户
+User=dty       # 指定服务的执行用户 必须存在
 ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver   # 指定服务的启动命令
 
 [Install]
-WantedBy=multi-user.target  # 指定服务的安装位置
+WantedBy=multi-user.target  # 指定服务的安装位置 `getent passwd | cut -d: -f1
+`查看所有用户
 ```
 
 一键配置
@@ -107,12 +109,34 @@ EOF
 
 执行命令
 ```
-sudo systemctl daemon-reload   #重新加载 systemd 配置
-sudo systemctl restart ac.service  #重启服务应用新的配置
+sudo systemctl daemon-reload   #重新加载systemd配置文件
+sudo systemctl restart ac.service  #重启服务应用新的配置,start stop
 sudo systemctl enable ac.service  #设置服务开机自启动
 
+journalctl -u ac.service   #查看 ac.service 的日志
+journalctl -xeu ac.service #查看服务的详细信息
+
 systemctl status ac.service  #查看状态
-systemctl list-unit-files   #查看服务是否开机启动列表
+systemctl list-unit-files    #查看服务是否开机启动列表
+systemctl disable ac.service  # 取消服务器开机自启动
+
+systemctl is-enabled postgresql.service # 查询是否自启动服务 显示 enabled 表示已启用
+```
+命令大全
+```
+systemctl start 服务名            开启服务
+systemctl stop 服务名            关闭服务
+systemctl status 服务名    　　　　显示状态
+systemctl restart 服务名    　　　　重启服务
+systemctl enable 服务名    　　　　开机启动服务
+systemctl disable 服务名    　　　　禁止开机启动
+systemctl list-units            　　查看系统中所有正在运行的服务
+systemctl list-unit-files    　　　　查看系统中所有服务的开机启动状态
+systemctl list-dependencies 服务名        　　查看系统中服务的依赖关系
+systemctl mask 服务名                        冻结服务
+systemctl unmask 服务名                      解冻服务
+systemctl set-default multi-user.target     开机时不启动图形界面
+systemctl set-default graphical.target      开机时启动图形界面
 ```
 </details>
 
