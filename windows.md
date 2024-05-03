@@ -1,5 +1,25 @@
 windows 命令
 
+<hr style="border: none; height: 1px; background-color: green;">
+<details>
+  <summary>文件里的字节搜索</summary>
+
+  
+PowerShell 命令
+```
+Get-ChildItem -Path "D:\wow\_classic_\Interface\AddOns\ZygorGuidesViewer\*" -File -Recurse | Select-String -Pattern "七天免费"
+
+```
+
+CMD命令
+```
+findstr /S /M /C:"七天免费" "D:\wow\_classic_\Interface\AddOns\ZygorGuidesViewer\*" /F:U
+
+```
+</details>
+
+<hr style="border: none; height: 1px; background-color: green;">
+
 ```
 powercfg -h on     #启用休眠功能。
 powercfg -h off    #禁用休眠功能,系统将不再使用 hiberfil.sys 文件来保存当前内存中的数据，这意味着计算机将无法进入休眠模式。
