@@ -11,7 +11,7 @@ Get-ChildItem -Path "D:\wow\_classic_\Interface\AddOns\ZygorGuidesViewer\*" -Fil
 
 ```
 
-CMD命令
+CMD命令 (中文字节不兼容）
 ```
 findstr /S /M /C:"七天免费" "D:\wow\_classic_\Interface\AddOns\ZygorGuidesViewer\*" /F:U
 
