@@ -189,3 +189,12 @@ source ~/.bashrc
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
+<details>
+  <summary>主机名修改</summary>
+  
+```
+sudo hostnamectl set-hostname <new_hostname>
+```
+</details>
+
+<hr style="border: none; height: 1px; background-color: green;">
