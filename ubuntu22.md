@@ -243,7 +243,7 @@ Wetty
 ```
 
 **[WeTTY官网](https://butlerx.github.io/wetty/#/)**
-<a href="[https://butlerx.github.io/wetty/#/](https://butlerx.github.io/wetty/#/atoz?id=configuration-reference)" target="_blank">WeTTY文档</a>
+**[WeTTY文档](https://butlerx.github.io/wetty/#/atoz?id=configuration-reference){:target="_blank"}**
 
 </details>
 
