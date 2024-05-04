@@ -1,4 +1,4 @@
-<img src="https://cdn.jsdelivr.net/gh/Dtyyyyyy/PicGoIMG/img/ubuntu.png" width = "100%" height = "100%" div align=center />
+<img src="https://cdn.jsdelivr.net/gh/Joshua-DinG/PicGoIMG/img/linux.jpg" width = "100%" height = "100%" div align=center />
 
 - [Link Text](#your_anchor_name)
 
