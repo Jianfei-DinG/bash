@@ -8,6 +8,7 @@
 <details>
   <summary>1.Ubuntu22配置静态IP</summary>
  <a name="1"></a>
+  
 ```
 sudo tee /etc/netplan/01-installer-config.yaml >/dev/null <<EOF
 network:
@@ -27,6 +28,7 @@ EOF
 <details>
   <summary>2.北京外国语大学开源软件镜像站</summary>
    <a name="2"></a>
+  
 追加
 ```
 sudo tee -a /etc/apt/sources.list <<EOF
@@ -77,6 +79,7 @@ EOF
 <details>
   <summary>3.systemctl 配置service 自动启动服务</summary>
    <a name="3"></a>
+  
 注释明细
 ```
 [Unit]    
@@ -171,6 +174,7 @@ systemctl set-default graphical.target      开机时启动图形界面
 <details>
   <summary>4.添加自定义命令</summary>
    <a name="4"></a>
+  
 编辑 shell 配置文件
 ```
 nano ~/.bashrc
@@ -196,6 +200,7 @@ source ~/.bashrc
 <details>
   <summary>5.主机名修改</summary>
    <a name="5"></a>
+  
 ```
 sudo hostnamectl set-hostname <new_hostname>
 ```
@@ -206,6 +211,7 @@ sudo hostnamectl set-hostname <new_hostname>
   
   <summary>6.Wetty web终端</summary>
   <a name="6"></a>
+  
 ```
 sudo docker run --rm -p 3200:3000 --name AC wettyoss/wetty --ssh-host=192.168.77.101 --title "世界服务器" --command 'tmux attach-session -t ac'
 ```
