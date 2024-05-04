@@ -122,13 +122,13 @@ User=dty
 Type=forking # 指定服务的类型为forking，表示该服务是一个forking类型的服务
 # 启动服务的命令，使用tmux创建一个名为ac的会话，并在其中启动世界服务器
 ExecStart=/usr/bin/tmux new-session -d -s ac '/home/dty/DinG/wow/wow-serve/bin/worldserver'
-#ExecStart=/usr/bin/screen -dmS ac /home/dty/DinG/wow/wow-serve/bin/worldserver
+#ExecStart=/usr/bin/screen -dmS ra /home/dty/DinG/wow/wow-serve/bin/authserver
 
 [Install]
 WantedBy=multi-user.target
 EOF
 ```
-`screen -r ac` #连接 退出Ctrl +a +d  |  `tmux attach-session -t ac` #连接退出Ctrl +b 放开后按 d 
+`screen -r rz` #连接 退出Ctrl +a +d  |  `tmux attach-session -t ac` #连接退出Ctrl +b 放开后按 d 
 
 执行命令
 ```
