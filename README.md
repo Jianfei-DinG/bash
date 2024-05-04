@@ -174,6 +174,7 @@ pip install flask Flask Flask-RESTful flask_sqlalchemy mysqlclient pymysql
 
 ```
 <a name="Python3"></a>
+
 <hr style="border: none; height: 1px; background-color: green;">
 
 
