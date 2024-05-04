@@ -198,3 +198,40 @@ sudo hostnamectl set-hostname <new_hostname>
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
+<details>
+  <summary>Wetty web终端</summary>
+  
+```
+docker run --rm -p 3000:3000 --name ssh wettyoss/wetty --ssh-host=192.168.77.101
+```
+
+Wetty
+---------------------------------------
+```
+选项：
+--help, -h     #打印帮助信息 [布尔值]
+--version     #显示版本号 [布尔值]
+--conf     #要加载配置的配置文件 [字符串]
+--ssl-key SSL      #密钥的路径 [字符串]
+--ssl-cert SSL      #证书的路径 [字符串]
+--ssh-host SSH      #服务器主机 [字符串]
+--ssh-port SSH      #服务器端口 [数字]
+--ssh-user SSH      #用户 [字符串]
+--title      #窗口标题 [字符串]
+--ssh-auth      #默认为 "password"，您可以使用 "publickey,password" 替代 [字符串]
+--ssh-pass      #SSH 密码 [字符串]
+--ssh-key      #可选的客户端私钥路径（连接将无需密码且不安全！） [字符串]
+--ssh-config      #指定替代 SSH 配置文件。有关详细信息，请参阅 SSH(1) 中的“-F”选项 [字符串]
+--force-ssh      #即使作为 root 用户运行也要通过 SSH 连接 [布尔值]
+--known-hosts      #已知主机文件的路径 [字符串]
+--base, -b wetty      #的基路径 [字符串]
+--port, -p wetty      #监听端口 [数字]
+--host wetty      #监听主机 [字符串]
+--command, -c      #在 shell 中运行的命令 [字符串]
+--allow-iframe      #允许 wetty 被嵌入到 iframe 中，默认允许同源 [布尔值]
+```
+
+**[WeTTY官网](https://butlerx.github.io/wetty/#/)**
+</details>
+
+<hr style="border: none; height: 1px; background-color: green;">
