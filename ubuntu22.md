@@ -3,7 +3,7 @@
 
 - [Link Text](#your_anchor_name)
 
-[Link Text 1](#anchor1) - [Link Text 2](#anchor2) - [Link Text 3](#anchor3)
+[Link Text 1](#anchor1) &nbsp;&nbsp;|&nbsp;&nbsp; [Link Text 2](#anchor2) &nbsp;&nbsp;|&nbsp;&nbsp; [Link Text 3](#anchor3)
 
 
 
