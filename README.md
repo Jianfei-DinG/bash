@@ -1,5 +1,7 @@
 <img src="https://cdn.jsdelivr.net/gh/Dtyyyyyy/PicGoIMG/img/ubuntu.png" width = "100%" height = "100%" div align=center />
 
+<button style="background-color: #4CAF50; color: white; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer; border-radius: 8px;">点击这个按钮</button>
+
 
 - [Link Text](#your_anchor_name)
 - [生成ding的秘钥](#ssh-keygen)
