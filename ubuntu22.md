@@ -128,7 +128,7 @@ ExecStart=/usr/bin/tmux new-session -d -s ac '/home/dty/DinG/wow/wow-serve/bin/w
 WantedBy=multi-user.target
 EOF
 ```
-`screen -r rz` #连接 退出Ctrl +a +d  |  `tmux attach-session -t ac` #连接退出Ctrl +b 放开后按 d 
+`screen -r rz` #连接 退出Ctrl +a +d  <br>  `tmux attach-session -t ac` #连接退出Ctrl +b 放开后按 d 
 
 执行命令
 ```
@@ -242,8 +242,8 @@ Wetty
 --allow-iframe      #允许 wetty 被嵌入到 iframe 中，默认允许同源 [布尔值]
 ```
 
-**[WeTTY官网](https://butlerx.github.io/wetty/#/)**
-**[WeTTY文档](https://butlerx.github.io/wetty/#/atoz?id=configuration-reference){:target="_blank"}**
+**[WeTTY官网](https://butlerx.github.io/wetty/#/)**&nbsp;&nbsp;|&nbsp;&nbsp;
+**[WeTTY文档](https://butlerx.github.io/wetty/#/atoz?id=configuration-reference)**
 
 </details>
 
