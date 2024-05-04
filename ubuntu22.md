@@ -1,14 +1,13 @@
 <img src="https://cdn.jsdelivr.net/gh/Joshua-DinG/PicGoIMG/img/wrye Bash.webp" width="%100" height="auto" align="center" />
 
 <hr style="border: none; height: 1px; background-color: green;">
-- [Link Text](#your_anchor_name)
 
-[Link Text 1](#anchor1) &nbsp;&nbsp;|&nbsp;&nbsp; [Link Text 2](#anchor2) &nbsp;&nbsp;|&nbsp;&nbsp; [Link Text 3](#anchor3)
+[Ubuntu22配置静态IP](#1) &nbsp;&nbsp;|&nbsp;&nbsp; [北京外国语大学开源软件镜像站](#2) &nbsp;&nbsp;|&nbsp;&nbsp; [systemctl 配置service 自动启动服务](#3)&nbsp;&nbsp;|&nbsp;&nbsp; [添加自定义命令](#4)&nbsp;&nbsp;|&nbsp;&nbsp; [主机名修改](#5)&nbsp;&nbsp;|&nbsp;&nbsp; [Wetty web终端](#6)
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
-  <summary>Ubuntu22配置静态IP</summary>
-
+  <summary>1.Ubuntu22配置静态IP</summary>
+ <a name="1"></a>
 ```
 sudo tee /etc/netplan/01-installer-config.yaml >/dev/null <<EOF
 network:
@@ -26,8 +25,8 @@ EOF
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
-  <summary>北京外国语大学开源软件镜像站</summary>
-  
+  <summary>2.北京外国语大学开源软件镜像站</summary>
+   <a name="2"></a>
 追加
 ```
 sudo tee -a /etc/apt/sources.list <<EOF
@@ -76,8 +75,8 @@ EOF
 <hr style="border: none; height: 1px; background-color: green;">
 
 <details>
-  <summary>systemctl 配置service 自动启动服务</summary>
-  
+  <summary>3.systemctl 配置service 自动启动服务</summary>
+   <a name="3"></a>
 注释明细
 ```
 [Unit]    
@@ -170,8 +169,8 @@ systemctl set-default graphical.target      开机时启动图形界面
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
-  <summary>添加自定义命令</summary>
-  
+  <summary>4.添加自定义命令</summary>
+   <a name="4"></a>
 编辑 shell 配置文件
 ```
 nano ~/.bashrc
@@ -195,8 +194,8 @@ source ~/.bashrc
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
-  <summary>主机名修改</summary>
-  
+  <summary>5.主机名修改</summary>
+   <a name="5"></a>
 ```
 sudo hostnamectl set-hostname <new_hostname>
 ```
@@ -204,9 +203,9 @@ sudo hostnamectl set-hostname <new_hostname>
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
-  <a name="your_anchor_name"></a>
-  <summary>Wetty web终端</summary>
   
+  <summary>6.Wetty web终端</summary>
+  <a name="6"></a>
 ```
 sudo docker run --rm -p 3200:3000 --name AC wettyoss/wetty --ssh-host=192.168.77.101 --title "世界服务器" --command 'tmux attach-session -t ac'
 ```
