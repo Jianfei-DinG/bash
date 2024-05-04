@@ -35,7 +35,7 @@ bash <(curl -Ls https://raw.githubusercontent.com/Joshua-DinG/bash/main/ubuntu/d
 ```
 
 <details>
-<summary>docker-compose.yml mysql</summary>
+<summary>docker run | docker-compose.yml mysql</summary>
   
 ```bash
 version: '3.1'
@@ -67,6 +67,26 @@ services:
 
 CST 代表是中国时区
 ```
+docker run 选项
+```
+容器配置选项：
+   -d：在后台模式下运行容器。
+   -e TZ=Asia/Shanghai  #同步时间
+   -i：交互式操作，保持 STDIN 打开。
+   -t：为容器分配一个伪终端 (pseudo-TTY)。
+
+   --restart always  自动重新启动容器
+   --name：为容器指定一个名称。
+   --rm：当容器退出时自动删除容器。
+   --hostname：设置容器的主机名。
+网络选项：
+   -p：将容器端口映射到主机端口。
+   --network：指定容器使用的网络。
+   --network=host 容器将与主机共享网络
+   --link：连接到另一个容器。
+
+-v /host/folder:/container/folder 文件夹映射
+```
 ```bash
 
 docker ps -a --filter "status=created"查看所有已经被创建但是尚未启动运行的容器
@@ -75,6 +95,7 @@ sudo docker ps -a --filter "status=exited" #查看所有已经停止运行的容
 docker container prune #删除未启动的 所有 容器
 docker volume prune #删除所有未被挂载到容器的卷
 
+docker attach container_id_or_name #连接到正在运行的容器，并附加到容器的标准输入，用名称或ID进入，必须按下 Ctrl+P，然后按下 Ctrl+Q
 docker stop <image_id>   # 停止容器
 docker rm <image_id>     # 删除容器
 
