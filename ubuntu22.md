@@ -3,9 +3,8 @@
 
 - [Link Text](#your_anchor_name)
 
-<div style="display: inline-block;">
-  [Link Text](#your_anchor_name) [Link Text](#your_anchor_name)
-</div>
+- [Link Text 1](#anchor1) - [Link Text 2](#anchor2) - [Link Text 3](#anchor3)
+
 
 
 
