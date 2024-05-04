@@ -207,12 +207,13 @@ sudo docker run --rm -p 3200:3000 --name AC wettyoss/wetty --ssh-host=192.168.77
 
 配置自动登录
 ```
-sudo docker run --rm -p 3300:3000 --name aa wettyoss/wetty \
-    --ssh-host=192.168.77.101 \
-    --title="123456" \
+sudo docker run --rm -p 8080:3000 --name AC wettyoss/wetty \
+    --ssh-host="192.168.77.101" \
+    --title="艾泽拉斯世界服务器" \
     --command="tmux attach-session -t ac" \
-    --ssh-user=dty \
-    --ssh-pass=0
+    --ssh-user="dty" \
+    --ssh-pass="0"
+
 ```
 
 Wetty
