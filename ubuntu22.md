@@ -98,7 +98,7 @@ Type=exec      # 指定服务的执行方式
 User=dty       # 指定服务的执行用户必须存在 输入`getent passwd | cut -d: -f1` 查看
 
 ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver   # 指定服务的启动命令
-
+Restart=always  #启动失败会重新启动服务，直到成功
 [Install]
 WantedBy=multi-user.target  # 指定服务的安装位置 `getent passwd | cut -d: -f1
 `查看所有用户
@@ -115,6 +115,7 @@ Requires=mysql.service
 Type=exec
 User=dty
 ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver
+Restart=always
 [Install]
 WantedBy=multi-user.target
 EOF
@@ -135,6 +136,7 @@ Type=forking # 指定服务的类型为forking，表示该服务是一个forking
 # 启动服务的命令，使用tmux创建一个名为ac的会话，并在其中启动世界服务器
 ExecStart=/usr/bin/tmux new-session -d -s ac '/home/dty/DinG/wow/wow-serve/bin/worldserver'
 #ExecStart=/usr/bin/screen -dmS ra /home/dty/DinG/wow/wow-serve/bin/authserver
+Restart=always
 
 [Install]
 WantedBy=multi-user.target
