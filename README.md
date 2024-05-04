@@ -4,7 +4,7 @@
 - [Link Text](#your_anchor_name)
 - [生成ding的秘钥](#ssh-keygen)
 - [修改系统时区](#date)
-- [Flask 环境安装](#Flask)
+- [Flask 环境安装](#Python3)
 # bash
 Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 正在完事中....
