@@ -2,9 +2,9 @@
 
 
 - [Link Text](#your_anchor_name)
-- [Link Text](#your_anchor_name)
-- [Link Text](#your_anchor_name)
-- [Flask 环境安装](#Flask 环境安装)
+- [生成ding的秘钥](#ssh-keygen)
+- [修改系统时区](#date)
+- [Flask 环境安装](#Flask)
 # bash
 Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 正在完事中....
@@ -137,6 +137,7 @@ sudo timedatectl set-timezone Asia/Shanghai \
 && timedatectl \
 && date
 ```
+<a name="date"></a>
 <hr style="border: none; height: 1px; background-color: green;">
 
 ssh-keygen 在CMD 创建服务端的隧道链接
@@ -147,6 +148,7 @@ type %USERPROFILE%\.ssh\ding.pub | ssh ding@192.168.2.156 "mkdir -p ~/.ssh && ca
 ssh -i %USERPROFILE%\.ssh\ding ding@192.168.2.156    #CMD登录
 ssh-keygen -p -f %USERPROFILE%/.ssh/ding -P ""    #清空秘钥密码
 ```
+<a name="ssh-keygen"></a>
 <hr style="border: none; height: 1px; background-color: green;">
 
 
@@ -164,7 +166,6 @@ py your_script.py      #运行
 py --version       #查版本号
 ```
 Flask 环境安装
-<a name="Flask 环境安装"></a>
 ```bash
 sudo apt-get update && \
 sudo apt-get install -y pkg-config && \
@@ -172,6 +173,7 @@ sudo apt-get install -y libmysqlclient-dev && \
 pip install flask Flask Flask-RESTful flask_sqlalchemy mysqlclient pymysql
 
 ```
+<a name="Python3"></a>
 <hr style="border: none; height: 1px; background-color: green;">
 
 
