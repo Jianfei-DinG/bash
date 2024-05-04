@@ -95,6 +95,7 @@ sudo docker ps -a --filter "status=exited" #查看所有已经停止运行的容
 docker container prune #删除未启动的 所有 容器
 docker volume prune #删除所有未被挂载到容器的卷
 
+attach 必须开启交互式才能使用 就是 -i -t
 docker attach container_id_or_name #连接到正在运行的容器，并附加到容器的标准输入，用名称或ID进入，必须按下 Ctrl+P，然后按下 Ctrl+Q
 docker stop <image_id>   # 停止容器
 docker rm <image_id>     # 删除容器
