@@ -1,14 +1,9 @@
 <img src="https://cdn.jsdelivr.net/gh/Joshua-DinG/PicGoIMG/img/wrye Bash.webp" width="%100" height="auto" align="center" />
 
-
+<hr style="border: none; height: 1px; background-color: green;">
 - [Link Text](#your_anchor_name)
 
 [Link Text 1](#anchor1) &nbsp;&nbsp;|&nbsp;&nbsp; [Link Text 2](#anchor2) &nbsp;&nbsp;|&nbsp;&nbsp; [Link Text 3](#anchor3)
-
-
-
-
-<hr style="border: none; height: 1px; background-color: green;">
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
