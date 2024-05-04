@@ -67,6 +67,13 @@ services:
 
 CST 代表是中国时区
 ```
+sudo docker stop $(sudo docker ps -aq)   #停止所有容器 <br>
+sudo docker rm $(sudo docker ps -aq)  #删除所有容器 <br>
+sudo docker rmi $(sudo docker images -aq)  #删除所有镜像 <br>
+一键删除所有docker
+```
+sudo docker stop $(sudo docker ps -aq) && sudo docker rm $(sudo docker ps -aq) && sudo docker rmi $(sudo docker images -aq)
+```
 docker run 选项
 ```
 容器配置选项：
