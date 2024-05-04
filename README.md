@@ -1,6 +1,8 @@
 <img src="https://cdn.jsdelivr.net/gh/Dtyyyyyy/PicGoIMG/img/ubuntu.png" width = "100%" height = "100%" div align=center />
 
 
+- [Link Text](#your_anchor_name)
+
 # bash
 Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 正在完事中....
@@ -167,6 +169,7 @@ sudo apt-get install -y libmysqlclient-dev && \
 pip install flask Flask Flask-RESTful flask_sqlalchemy mysqlclient pymysql
 
 ```
+<a name="your_anchor_name"></a>
 <hr style="border: none; height: 1px; background-color: green;">
 
 
