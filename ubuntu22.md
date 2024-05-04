@@ -107,7 +107,7 @@ ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver
 WantedBy=multi-user.target
 EOF
 ```
-交互式配置
+交互式终端配置
 ```
 sudo tee /etc/systemd/system/ac.service >/dev/null <<EOF
 [Unit]
@@ -128,8 +128,7 @@ ExecStart=/usr/bin/tmux new-session -d -s ac '/home/dty/DinG/wow/wow-serve/bin/w
 WantedBy=multi-user.target
 EOF
 ```
-`screen -r ac` #连接 退出Ctrl +a +d
-`tmux attach-session -t ac` #连接退出Ctrl +b 放开后按 d 
+`screen -r ac` #连接 退出Ctrl +a +d  |  `tmux attach-session -t ac` #连接退出Ctrl +b 放开后按 d 
 
 执行命令
 ```
