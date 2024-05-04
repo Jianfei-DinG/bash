@@ -243,6 +243,8 @@ Wetty
 ```
 
 **[WeTTY官网](https://butlerx.github.io/wetty/#/)**
+<a href="[https://butlerx.github.io/wetty/#/](https://butlerx.github.io/wetty/#/atoz?id=configuration-reference)" target="_blank">WeTTY文档</a>
+
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
