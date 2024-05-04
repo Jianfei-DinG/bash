@@ -202,7 +202,7 @@ sudo hostnamectl set-hostname <new_hostname>
   <summary>Wetty web终端</summary>
   
 ```
-docker run --rm -p 3000:3000 --name ssh wettyoss/wetty --ssh-host=192.168.77.101
+sudo docker run --rm -p 3200:3000 --name AC wettyoss/wetty --ssh-host=192.168.77.101 --title "世界服务器" --command 'tmux attach-session -t ac'
 ```
 
 Wetty
