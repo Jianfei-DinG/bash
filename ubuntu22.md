@@ -166,18 +166,22 @@ systemctl set-default graphical.target      开机时启动图形界面
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
   <summary>添加自定义命令</summary>
+  
 编辑 shell 配置文件
 ```
 nano ~/.bashrc
 ```
+
 最后一行添加
 ```
 alias ac='tmux attach-session -t ac'
 ```
+
 重新加载你的 shell 配置文件
 ```
 source ~/.bashrc
 ```
+
   一键写入
   ```
   echo "alias ac='tmux attach-session -t ac'" | sudo tee -a ~/.bashrc > /dev/null && source ~/.bashrc
