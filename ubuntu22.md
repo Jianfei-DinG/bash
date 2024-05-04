@@ -2,7 +2,8 @@
 
 <hr style="border: none; height: 1px; background-color: green;">
 
-[Ubuntu22配置静态IP](#1) &nbsp;&nbsp;|&nbsp;&nbsp; [北京外国语大学开源软件镜像站](#2) &nbsp;&nbsp;|&nbsp;&nbsp; [systemctl 配置service 自动启动服务](#3)&nbsp;&nbsp;|&nbsp;&nbsp; [添加自定义命令](#4)&nbsp;&nbsp;|&nbsp;&nbsp; [主机名修改](#5)&nbsp;&nbsp;|&nbsp;&nbsp; [Wetty web终端](#6)
+- [Ubuntu22配置静态IP](#1) &nbsp;&nbsp;|&nbsp;&nbsp; - [北京外国语大学开源软件镜像站](#2) &nbsp;&nbsp;|&nbsp;&nbsp;
+- [systemctl 配置service 自动启动服务](#3)&nbsp;&nbsp;|&nbsp;&nbsp; - [添加自定义命令](#4)&nbsp;&nbsp;|&nbsp;&nbsp; [主机名修改](#5)&nbsp;&nbsp;|&nbsp;&nbsp; [Wetty web终端](#6)
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
