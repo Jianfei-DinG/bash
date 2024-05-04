@@ -3,6 +3,23 @@
 
 - [Link Text](#your_anchor_name)
 
+<div style="display: inline-block;">
+  - [Link Text 1](#anchor1)
+</div>
+
+<div style="display: inline-block;">
+  - [Link Text 2](#anchor2)
+</div>
+
+<div style="float: left; margin-right: 10px;">
+  - [Link Text 1](#anchor1)
+</div>
+
+<div style="float: left;">
+  - [Link Text 2](#anchor2)
+</div>
+
+
 <hr style="border: none; height: 1px; background-color: green;">
 
 <hr style="border: none; height: 1px; background-color: green;">
