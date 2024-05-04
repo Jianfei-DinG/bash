@@ -205,6 +205,16 @@ sudo hostnamectl set-hostname <new_hostname>
 sudo docker run --rm -p 3200:3000 --name AC wettyoss/wetty --ssh-host=192.168.77.101 --title "世界服务器" --command 'tmux attach-session -t ac'
 ```
 
+配置自动登录
+```
+sudo docker run --rm -p 3300:3000 --name aa wettyoss/wetty \
+    --ssh-host=192.168.77.101 \
+    --title="123456" \
+    --command="tmux attach-session -t ac" \
+    --ssh-user=dty \
+    --ssh-pass=0
+```
+
 Wetty
 ---------------------------------------
 ```
