@@ -107,6 +107,33 @@ ExecStart=/home/dty/DinG/wow/wow-serve/bin/worldserver
 WantedBy=multi-user.target
 EOF
 ```
+交互式配置
+```
+sudo tee /etc/systemd/system/ac.service >/dev/null <<EOF
+# 描述服务的用途
+[Unit]
+Description=世界服务器
+Documentation=www.dty.im
+# 指定服务的启动顺序
+After=network.target mysql.service
+Requires=mysql.service
+
+[Service]
+# 设置环境变量，指定显示器为:0
+Environment=DISPLAY=:0
+# 指定服务运行的用户
+User=dty
+
+# 指定服务的类型为forking，表示该服务是一个forking类型的服务
+Type=forking
+# 启动服务的命令，使用tmux创建一个名为ac的会话，并在其中启动世界服务器
+ExecStart=/usr/bin/tmux new-session -d -s ac '/home/dty/DinG/wow/wow-serve/bin/worldserver'
+
+[Install]
+# 指定服务的安装位置为multi-user.target，表示在多用户模式下启用该服务
+WantedBy=multi-user.target
+EOF
+```
 
 执行命令
 ```
