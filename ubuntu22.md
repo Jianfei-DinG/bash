@@ -266,3 +266,22 @@ Wetty
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
+<details>
+  
+  <summary>修改系统时区</summary>
+
+ 修改时区
+```
+sudo dpkg-reconfigure tzdata
+```
+设置为24小时制
+```
+sudo nano /etc/default/locale
+
+LC_TIME="en_US.UTF-8"
+
+sudo reboot
+```
+</details>
+
+<hr style="border: none; height: 1px; background-color: green;">
