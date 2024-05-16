@@ -282,6 +282,11 @@ LC_TIME="en_US.UTF-8"
 LC_TIME=zh_CN.UTF-8
 sudo reboot
 ```
+
+```
+echo 'LC_TIME=en_US.UTF-8' | sudo tee /etc/default/locale > /dev/null
+echo 'LC_TIME=zh_CN.UTF-8' | sudo tee /etc/default/locale > /dev/null
+```
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
