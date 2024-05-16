@@ -279,7 +279,7 @@ sudo dpkg-reconfigure tzdata
 sudo nano /etc/default/locale
 
 LC_TIME="en_US.UTF-8"
-
+LC_TIME=zh_CN.UTF-8
 sudo reboot
 ```
 </details>
