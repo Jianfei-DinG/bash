@@ -289,6 +289,7 @@ sudo reboot
 ```
 echo 'LANG=zh_CN.UTF-8' | sudo tee /etc/default/locale > /dev/null
 ```
+source /etc/default/locale  #重新加载
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
