@@ -272,7 +272,8 @@ Wetty
 
  修改时区
 ```
-sudo dpkg-reconfigure tzdata
+sudo dpkg-reconfigure tzdata #交互式界面设置时区
+sudo timedatectl set-timezone Asia/Shanghai  #命令修改时区
 ```
 设置为24小时制
 ```
@@ -286,8 +287,7 @@ sudo reboot
 ```
 
 ```
-echo 'LC_TIME=en_US.UTF-8' | sudo tee /etc/default/locale > /dev/null
-echo 'LC_TIME=zh_CN.UTF-8' | sudo tee /etc/default/locale > /dev/null
+echo 'LANG=zh_CN.UTF-8' | sudo tee /etc/default/locale > /dev/null
 ```
 </details>
 
