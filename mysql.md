@@ -66,3 +66,58 @@ GRANT ALL PRIVILEGES ON database2.* TO 'user'@'远程主机IP' IDENTIFIED BY 'pa
 quit #退出
 ```
 <hr style="border: none; height: 1px; background-color: green;">
+
+Flask 连接
+```
+pip install Flask-SQLAlchemy
+
+底层驱动
+pip install mysql-connector-python
+pip install PyMySQL
+```
+
+模板
+```
+from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+
+# 配置数据库连接地址
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@localhost/db_name'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# 创建数据库实例
+db = SQLAlchemy(app)
+
+# 定义数据库模型类
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    email = db.Column(db.String(120), unique=True, nullable=False)
+
+    def __repr__(self):
+        return '<User %r>' % self.username
+
+# 创建所有的数据库表
+with app.app_context():
+    db.create_all()
+
+# 路由视图
+@app.route('/')
+def index():
+    # 查询所有用户
+    users = User.query.all()
+    return render_template('index.html', users=users)
+
+# 关闭数据库连接
+@app.teardown_appcontext
+def shutdown_session(exception=None):
+    db.session.remove()
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+```
+
+<hr style="border: none; height: 1px; background-color: green;">
