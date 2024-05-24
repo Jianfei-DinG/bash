@@ -278,6 +278,7 @@ sudo timedatectl set-timezone Asia/Shanghai  #命令修改时区
 设置为24小时制
 ```
 sudo nano /etc/default/locale
+LANG=en_US.UTF-8  #默认
 
 LC_TIME="en_US.UTF-8"
 LC_TIME=zh_CN.UTF-8
