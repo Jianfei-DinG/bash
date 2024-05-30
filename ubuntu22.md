@@ -8,6 +8,7 @@
 - [添加自定义命令](#4)&nbsp;&nbsp;|&nbsp;&nbsp;
 - [主机名修改](#5)&nbsp;&nbsp;|&nbsp;&nbsp;
 - [Wetty web终端](#6)
+-  下载 https://cloud-images.ubuntu.com/
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
