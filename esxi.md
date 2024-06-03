@@ -4,6 +4,8 @@ bios 中开启VT-d   可以看见可以直通的设备
 直通教程
 https://www.youtube.com/watch?v=jiBxVuDMZbY&t=327s
 
+hypervisor.cpuid.v0=FALSE #添加后windows cpu 显示虚拟化：不可用
+
 ESXI安装
 ```
 Shift+O 编辑引导选项
