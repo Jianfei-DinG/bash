@@ -1,4 +1,8 @@
 
+bios 中开启VT-d   可以看见可以直通的设备
+
+直通教程
+https://www.youtube.com/watch?v=jiBxVuDMZbY&t=327s
 
 ESXI安装
 ```
