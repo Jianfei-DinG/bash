@@ -64,4 +64,31 @@ ipconfig /flushdns    #刷新 DNS 缓存,清空本地 DNS 缓存，删除先前�
 netsh winsock reset   #重置 Winsock 目录。Winsock 是 Windows 中用于处理网络通信的 API，有时重置它可以解决网络连接问题。
 
 ```
-<hr>
+<hr style="border: none; height: 1px; background-color: green;">
+
+设置开机自动启动
+```
+Win + R
+输入 shell:startup 添加快捷键
+
+注册表方式
+当前用户启动
+计算机\HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+所有用户启动
+计算机\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run
+
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v QQ /t REG_SZ /d "C:\Program Files (x86)\Tencent\QQ\Bin\QQScLauncher.exe" /f
+
+reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v QQ /t REG_SZ /d "C:\Program Files\Tencent\QQ\Bin\QQ.exe" /f
+
+```
+<hr style="border: none; height: 1px; background-color: green;">
+
+配置无人值守
+```
+windows 无人值守安装
+autounattend.xml 
+
+https://www.windowsafg.com/index.html
+```
