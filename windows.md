@@ -41,7 +41,9 @@ findstr /S /M /C:"七天免费" "D:\wow\_classic_\Interface\AddOns\ZygorGuidesVi
 powercfg -h on     #启用休眠功能。
 powercfg -h off    #禁用休眠功能,系统将不再使用 hiberfil.sys 文件来保存当前内存中的数据，这意味着计算机将无法进入休眠模式。
 powercfg /a        #查看状态
+windows11 开启创建本地账号：Shift + f10 输入 oobe\bypassnro 后重启
 
+解除地区限制：C:\Windows\System32，找到 IntegratedServicesRegionPolicySet.json，移动到最后去除 cn
 "C:\Program Files\7-Zip\7z.exe" x "D:\软件\tcping_Windows.zip" "-oC:\output" #解压命令
 
 mrt         #检测和删除 Windows 操作系统中的常见恶意软件
