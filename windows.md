@@ -82,6 +82,15 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v QQ 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v QQ /t REG_SZ /d "C:\Program Files\Tencent\QQ\Bin\QQ.exe" /f
 
 ```
+
+后台启动配置 :vMixDesktopCapture.vbs
+
+```
+Dim WShell
+Set WShell = CreateObject("WScript.Shell")
+WShell.Run """" & "D:\vMixDesktopCaptureNDI\vMixDesktopCapture.exe" & """", 0
+Set WShell = Nothing
+```
 <hr style="border: none; height: 1px; background-color: green;">
 
 配置无人值守
