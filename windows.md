@@ -1,6 +1,5 @@
 windows 命令
 
-
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
   <summary>制作命令</summary>
@@ -92,3 +91,5 @@ autounattend.xml
 
 https://www.windowsafg.com/index.html
 ```
+补丁库
+https://www.catalog.update.microsoft.com/Search.aspx?q=windows%2010
