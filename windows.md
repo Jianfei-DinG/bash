@@ -84,7 +84,8 @@ reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v QQ 
 ```
 
 后台启动配置 :vMixDesktopCapture.vbs
-
+<br>
+cscript example.vbs  # VBScript 和 JScript 脚本的命令行解释器
 ```
 Dim WShell
 Set WShell = CreateObject("WScript.Shell")
