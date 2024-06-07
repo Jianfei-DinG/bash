@@ -295,3 +295,44 @@ source /etc/default/locale  #重新加载
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
+
+<details>
+  
+  <summary>Samba 共享文件夹</summary>
+
+ 
+```
+安装
+sudo apt update
+sudo apt install samba
+
+whereis samba
+创建用户
+sudo adduser sambauser
+sudo gpasswd sambashare -a nobody #添加用户到 Samba 共享组
+sudo usermod -aG sambashare dty
+
+sudo smbpasswd -a sambauser #创建 Samba 密码
+
+sudo chown -R sambauser:sambauser /home/sambauser/123456  #创建文件夹 的用户和组
+
+sudo nano /etc/samba/smb.conf
+[Anonymous]
+path = /srv/samba/share
+readonly = no
+inherit permission = yes
+
+sudo service smbd restart
+```
+
+注释
+```
+[Anonymous]
+   path = /srv/samba/share
+   readonly = no  #这个参数指定共享文件夹是否是只读的。设置为 no 表示允许读取和写入文件。
+   inherit permissions = yes  #这个参数指定共享文件夹是否继承其父目录的权限设置。设置为 yes 表示继承父目录的权限设置
+```
+
+</details>
+
+<hr style="border: none; height: 1px; background-color: green;">
