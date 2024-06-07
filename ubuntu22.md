@@ -322,6 +322,8 @@ path = /srv/samba/share
 readonly = no
 inherit permission = yes
 
+testparm #检查配置文件
+
 sudo service smbd restart
 ```
 
