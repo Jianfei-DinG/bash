@@ -321,6 +321,7 @@ sudo nano /etc/samba/smb.conf
 path = /srv/samba/share
 readonly = no
 inherit permission = yes
+valid users = @dty #添加组
 
 testparm #检查配置文件
 
@@ -329,6 +330,14 @@ sudo service smbd restart
 
 注释
 ```
+sudo groupadd dty #创建 dty 组
+
+添加多个用户到该组
+sudo usermod -aG dty user1
+sudo usermod -aG dty user2
+
+sudo chown -R :dty /home/dty/kk8
+
 [Anonymous]
    path = /srv/samba/share
    readonly = no  #这个参数指定共享文件夹是否是只读的。设置为 no 表示允许读取和写入文件。
