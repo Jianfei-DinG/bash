@@ -9,6 +9,7 @@
 - [主机名修改](#5)&nbsp;&nbsp;|&nbsp;&nbsp;
 - [Wetty web终端](#6)
 -  下载 https://cloud-images.ubuntu.com/
+-  Ubuntu Mini ISO https://cdimage.ubuntu.com/ubuntu-mini-iso/daily-live/current/
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
