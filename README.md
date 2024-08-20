@@ -16,8 +16,8 @@ Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 > ```
 > bash <(curl -s -L https://git.io/JDkrf)
 ```
-
-bash <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh
+```
+sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh
 ```
 <details>
   > <summary>UDP端口封装在TCP端口上通信</summary>
