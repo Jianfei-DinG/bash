@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# 确保 .ssh 目录存在并设置正确的权限
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+
+# 使用 tee 将公钥添加到 authorized_keys 文件
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDruTZ0ayBfJt8LtZYzquTLSwa8ZL3yo4m5fo55JKgbUQxiIFxsfD9i3TiDvGhPJcXNlPQ85YXegqTkzE0VpSpiDYJCNt+qTuMO0twbrN3nD0OqqzW/TsEGjaAMuzz9UBchRyJq5a42AbdXcdyA0FsqF2XbQJbArhxUwrPxoi4adBQc1qRhnc3UMfoPqfShmaD04ZzWcKQ5ld8QdWytJlBQ0VbKAOGPq6T0qF56YjeQJgLZTQEg1RPx3Ej+G2y9ePv3bHPdflSnUtDL1Ho3G6m2Q6RqUbyDQaixHwd5nto+3Rp4fY9It7Qr5F6jfyyGpNdJXLOelXZI9Mt+1BsClwaYNmHm8RJCZT0hOFdWdDkh2rP3+j86LOorKQ1PU1Yq+isXzGEsCAA76aGR5zyL3JfXECG4VOq0VucNAAB7xXc9X1+wusVudEkN3QQ+oEM1F1A28d3mFzT4woChfBH4Jtrnh7UHheuBU/c2KcVKlegm5P+KP/6avfjLG5l8D6m5dz5e7wU0LLykkoHmykGCeHeSLXwp2fDsbztWwWlRb6in7urW7zzKfG+HeHIArTe3qrDO6UUBKABlWIRRl/K5E4DkRikU+lDybVDFwN/RrKdZl7F4MWKvaxHVYnxUSUHjUbCK+4qC3DhsWAhEZLCyc5Ij2ExoioJmqj1TvAwwkX5rcQ== dty@DESKTOP-7R3NVIH" | tee -a ~/.ssh/authorized_keys
+
+# 设置 authorized_keys 文件的正确权限
+chmod 600 ~/.ssh/authorized_keys
+
+# 确保启用公钥认证
+if [ -f /etc/ssh/sshd_config ]; then
+    sudo sed -i 's/#PubkeyAuthentication yes/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+    sudo sed -i 's/PubkeyAuthentication no/PubkeyAuthentication yes/' /etc/ssh/sshd_config
+    
+    # 重启 SSH 服务以应用更改
+    sudo systemctl restart sshd
+    echo "公钥已添加，并且已启用公钥认证。SSH 服务已重启。"
+else
+    echo "未找到 sshd_config 文件。请手动确保已启用公钥认证。"
+fi
