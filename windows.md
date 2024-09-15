@@ -40,6 +40,9 @@ findstr /S /M /C:"七天免费" "D:\wow\_classic_\Interface\AddOns\ZygorGuidesVi
 powercfg -h on     #启用休眠功能。
 powercfg -h off    #禁用休眠功能,系统将不再使用 hiberfil.sys 文件来保存当前内存中的数据，这意味着计算机将无法进入休眠模式。
 powercfg /a        #查看状态
+sfc /scannow       #系统文件检查器，扫描系统文件的完整性，并自动修复发现的问题
+DISM /Online /Cleanup-Image /RestoreHealth  #如果系统文件检查器发现问题但无法修复所有问题，你可能需要使用 DISM
+
 
 format /q C:   #快速格式C盘
 windows11 开启创建本地账号：Shift + f10 输入 oobe\bypassnro 后重启
