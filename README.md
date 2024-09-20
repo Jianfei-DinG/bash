@@ -21,7 +21,7 @@ ssl一键生成脚本
 ```
 bash <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssl_certificate.sh)
 ```
-
+ssh 
 ```
 sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh)
 ```
