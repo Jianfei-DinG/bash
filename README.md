@@ -16,6 +16,12 @@ Ubuntu的脚本，方便对代码不熟悉的便捷脚本。
 > ```
 > bash <(curl -s -L https://git.io/JDkrf)
 ```
+ssl一键生成脚本
+
+```
+bash <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssl_certificate.sh)
+```
+
 ```
 sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh)
 ```
