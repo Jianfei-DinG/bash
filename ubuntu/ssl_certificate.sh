@@ -15,7 +15,7 @@ NC='\033[0m' # 无色
 print_stylish_title() {
     echo -e "${BOLD}${MAGENTA}"
     echo "+=================================+"
-    echo "|      SSL 证书一键生成器       |"
+    echo "|      SSL 证书一键生成器          |"
     echo "+=================================+"
     echo -e "${NC}"
 }
