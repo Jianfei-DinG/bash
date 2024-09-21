@@ -23,7 +23,7 @@ bash <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu
 ```
 ssh 
 ```
-sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh)
+sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh_keys)
 ```
 <details>
   > <summary>UDP端口封装在TCP端口上通信</summary>
