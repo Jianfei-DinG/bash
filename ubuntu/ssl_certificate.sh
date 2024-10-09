@@ -27,7 +27,7 @@ generate_certificate() {
     echo -e "${CYAN}正在为 ${YELLOW}$DOMAIN${CYAN} 生成私钥和证书...${NC}"
     openssl genpkey -algorithm RSA -out "$DOMAIN.key"
     openssl req -new -key "$DOMAIN.key" -out "$DOMAIN.csr" -subj "/C=CN/ST=Hong Kong/L=Hong Kong/O=MyCompany/OU=IT Department/CN=$DOMAIN/emailAddress=$EMAIL"
-    openssl x509 -req -in "$DOMAIN.csr" -signkey "$DOMAIN.key" -out "$DOMAIN.crt" -days 365
+    openssl x509 -req -in "$DOMAIN.csr" -signkey "$DOMAIN.key" -out "$DOMAIN.crt" -days 5475
     echo -e "${GREEN}证书为 $DOMAIN 生成完毕 (${DOMAIN}.crt)${NC}"
 }
 
