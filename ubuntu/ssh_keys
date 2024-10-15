@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# 检查并安装 sudo（仅限 Debian 系统）
+if [ -f /etc/debian_version ] || [ -f /etc/lsb-release ]; then
+    echo "检测到 Debian 系统，正在检查 sudo 是否安装..."
+    if ! command -v sudo &> /dev/null; then
+        echo "未安装 sudo，正在安装..."
+        apt update
+        apt install -y sudo
+    else
+        echo "sudo 已安装。"
+    fi
+fi
+
 # 获取当前用户名和主机名
 current_user=$(whoami)
 current_hostname=$(hostname)
@@ -33,8 +45,6 @@ if [ -f /etc/ssh/sshd_config ]; then
     fi
 
     echo "公钥已添加，启用了公钥认证，禁用了密码认证，并限制了 root 登录。SSH 服务已重启。"
-    echo "您的公钥是："
-    echo "$public_key"
 else
     echo "未找到 sshd_config 文件。请手动确保已启用公钥认证和其他安全设置。"
 fi
