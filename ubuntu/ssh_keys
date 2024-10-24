@@ -1,0 +1,164 @@
+#!/bin/bash
+
+# 配置日志输出
+log() {
+    echo "● $1" | tee -a script.log
+}
+
+# 错误日志
+error() {
+    echo "✗ 错误: $1" >&2
+}
+
+# 检查命令执行状态
+check_status() {
+    if [ $? -ne 0 ]; then
+        error "$1"
+        exit 1
+    fi
+}
+
+# 获取系统类型
+get_system_type() {
+    if [ -f /etc/debian_version ]; then
+        echo "Debian/Ubuntu"
+    elif [ -f /etc/redhat-release ]; then
+        echo "RedHat/CentOS"
+    elif [ -f /etc/alpine-release ]; then
+        echo "Alpine Linux"
+    else
+        echo "未知系统"
+    fi
+}
+
+# 检查root权限
+check_root() {
+    if [ "$EUID" -ne 0 ]; then
+        if ! command -v sudo >/dev/null 2>&1; then
+            error "此脚本需要 root 权限或 sudo 访问权限"
+            exit 1
+        fi
+    fi
+}
+
+# 检查并安装sudo
+install_sudo() {
+    if ! command -v sudo >/dev/null 2>&1; then
+        log "检测到未安装 sudo，正在安装..."
+        if [ -f /etc/debian_version ]; then
+            sudo apt-get update && sudo apt-get install -y sudo
+            check_status "sudo 安装失败"
+        elif [ -f /etc/redhat-release ]; then
+            if command -v dnf >/dev/null 2>&1; then
+                sudo dnf install -y sudo
+            else
+                sudo yum install -y sudo
+            fi
+            check_status "sudo 安装失败"
+        else
+            error "不支持的系统类型"
+            exit 1
+        fi
+    else
+        log "检测到 sudo 已安装"
+    fi
+}
+
+# 设置SSH目录和权限
+setup_ssh_directory() {
+    mkdir -p ~/.ssh
+    check_status "创建 .ssh 目录失败"
+
+    chmod 700 ~/.ssh
+    check_status "设置 .ssh 目录权限失败"
+
+    # 清空 authorized_keys 文件
+    > ~/.ssh/authorized_keys
+    check_status "清空 authorized_keys 文件失败"
+
+    chmod 600 ~/.ssh/authorized_keys
+    check_status "设置 authorized_keys 权限失败"
+
+    log "SSH 公钥文件已创建"
+}
+
+# 添加SSH公钥
+add_ssh_key() {
+    current_user=$(whoami)
+    current_hostname=$(hostname)
+
+    # 直接添加公钥，覆盖所有内容
+    ssh_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDruTZ0ayBfJt8LtZYzquTLSwa8ZL3yo4m5fo55JKgbUQxiIFxsfD9i3TiDvGhPJcXNlPQ85YXegqTkzE0VpSpiDYJCNt+qTuMO0twbrN3nD0OqqzW/TsEGjaAMuzz9UBchRyJq5a42AbdXcdyA0FsqF2XbQJbArhxUwrPxoi4adBQc1qRhnc3UMfoPqfShmaD04ZzWcKQ5ld8QdWytJlBQ0VbKAOGPq6T0qF56YjeQJgLZTQEg1RPx3Ej+G2y9ePv3bHPdflSnUtDL1Ho3G6m2Q6RqUbyDQaixHwd5nto+3Rp4fY9It7Qr5F6jfyyGpNdJXLOelXZI9Mt+1BsClwaYNmHm8RJCZT0hOFdWdDkh2rP3+j86LOorKQ1PU1Yq+isXzGEsCAA76aGR5zyL3JfXECG4VOq0VucNAAB7xXc9X1+wusVudEkN3QQ+oEM1F1A28d3mFzT4woChfBH4Jtrnh7UHheuBU/c2KcVKlegm5P+KP/6avfjLG5l8D6m5dz5e7wU0LLykkoHmykGCeHeSLXwp2fDsbztWwWlRb6in7urW7zzKfG+HeHIArTe3qrDO6UUBKABlWIRRl/K5E4DkRikU+lDybVDFwN/RrKdZl7F4MWKvaxHVYnxUSUHjUbCK+4qC3DhsWAhEZLCyc5Ij2ExoioJmqj1TvAwwkX5rcQ== ${current_user}@${current_hostname}"
+
+    echo "$ssh_key" > ~/.ssh/authorized_keys
+    check_status "添加 SSH 公钥失败"
+    log "SSH 公钥已添加成功"
+}
+
+# 配置SSH服务
+configure_sshd() {
+    sshd_config="/etc/ssh/sshd_config"
+    if [ ! -f "$sshd_config" ]; then
+        error "未找到 sshd_config 文件"
+        exit 1
+    fi
+
+    # 修改 SSH 配置
+    sudo sed -i 's/^#*PubkeyAuthentication.*/PubkeyAuthentication yes/' "$sshd_config"
+    check_status "修改 SSH 配置失败"
+
+    sudo sed -i 's/^#*PasswordAuthentication.*/PasswordAuthentication no/' "$sshd_config"
+    check_status "修改 SSH 配置失败"
+
+    sudo sed -i 's/^#*PermitRootLogin.*/PermitRootLogin prohibit-password/' "$sshd_config"
+    check_status "修改 SSH 配置失败"
+}
+
+# 重启SSH服务
+restart_sshd() {
+    if [ -f /etc/alpine-release ]; then
+        log "重启 Alpine Linux SSH 服务..."
+        sudo rc-service sshd restart
+    elif command -v systemctl >/dev/null 2>&1; then
+        if systemctl list-units --type=service | grep -q "ssh.service"; then
+            log "重启 Debian/Ubuntu SSH 服务..."
+            sudo systemctl restart ssh
+        else
+            log "重启 SSH 服务..."
+            sudo systemctl restart sshd
+        fi
+    else
+        error "无法确定如何重启 SSH 服务"
+        exit 1
+    fi
+    check_status "重启 SSH 服务失败"
+    log "SSH 服务重启成功"
+}
+
+# 主函数
+main() {
+    echo "==================== SSH 配置脚本 ====================" | tee script.log
+
+    # 检测系统类型
+    system_type=$(get_system_type)
+    log "当前系统: $system_type"
+
+    # 检查root权限
+    check_root
+
+    # 安装必要组件
+    install_sudo
+
+    # 设置SSH
+    setup_ssh_directory
+    add_ssh_key
+    configure_sshd
+    restart_sshd
+
+    echo "==================== 配置完成 ====================" | tee -a script.log
+    log "SSH 公钥配置已完成"
+    log "已启用公钥认证，禁用密码认证 输入exit 退出后重连"
+}
+
+# 执行主函数
+main
