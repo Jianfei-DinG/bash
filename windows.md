@@ -43,6 +43,9 @@ powercfg /a        #查看状态
 sfc /scannow       #系统文件检查器，扫描系统文件的完整性，并自动修复发现的问题
 DISM /Online /Cleanup-Image /RestoreHealth  #如果系统文件检查器发现问题但无法修复所有问题，你可能需要使用 DISM
 
+windows激活命令
+irm https://get.activated.win iex
+irm https://massgrave.dev/get | iex
 
 format /q C:   #快速格式C盘
 windows11 开启创建本地账号：Shift + f10 输入 oobe\bypassnro 后重启
