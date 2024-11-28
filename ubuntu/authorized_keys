@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# 添加SSH公钥到当前用户
+add_ssh_key() {
+    # 获取当前用户和主机名
+    current_user=$(whoami)
+    current_hostname=$(hostname)
+
+    # SSH公钥
+    ssh_key="ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDruTZ0ayBfJt8LtZYzquTLSwa8ZL3yo4m5fo55JKgbUQxiIFxsfD9i3TiDvGhPJcXNlPQ85YXegqTkzE0VpSpiDYJCNt+qTuMO0twbrN3nD0OqqzW/TsEGjaAMuzz9UBchRyJq5a42AbdXcdyA0FsqF2XbQJbArhxUwrPxoi4adBQc1qRhnc3UMfoPqfShmaD04ZzWcKQ5ld8QdWytJlBQ0VbKAOGPq6T0qF56YjeQJgLZTQEg1RPx3Ej+G2y9ePv3bHPdflSnUtDL1Ho3G6m2Q6RqUbyDQaixHwd5nto+3Rp4fY9It7Qr5F6jfyyGpNdJXLOelXZI9Mt+1BsClwaYNmHm8RJCZT0hOFdWdDkh2rP3+j86LOorKQ1PU1Yq+isXzGEsCAA76aGR5zyL3JfXECG4VOq0VucNAAB7xXc9X1+wusVudEkN3QQ+oEM1F1A28d3mFzT4woChfBH4Jtrnh7UHheuBU/c2KcVKlegm5P+KP/6avfjLG5l8D6m5dz5e7wU0LLykkoHmykGCeHeSLXwp2fDsbztWwWlRb6in7urW7zzKfG+HeHIArTe3qrDO6UUBKABlWIRRl/K5E4DkRikU+lDybVDFwN/RrKdZl7F4MWKvaxHVYnxUSUHjUbCK+4qC3DhsWAhEZLCyc5Ij2ExoioJmqj1TvAwwkX5rcQ== ${current_user}@${current_hostname}"
+
+    # 准备SSH目录
+    mkdir -p ~/.ssh
+    chmod 700 ~/.ssh
+
+    # 写入公钥，设置正确权限
+    echo "$ssh_key" > ~/.ssh/authorized_keys
+    chmod 600 ~/.ssh/authorized_keys
+
+    # 输出成功信息
+    echo "SSH公钥已成功添加到 ~/.ssh/authorized_keys"
+}
+
+# 直接调用函数
+add_ssh_key
