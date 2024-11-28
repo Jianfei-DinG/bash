@@ -25,6 +25,9 @@ ssh
 ```
 sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh_keys)
 ```
+```
+sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash@main/ubuntu/ssh_key)
+```
 <details>
   > <summary>UDP端口封装在TCP端口上通信</summary>
 
