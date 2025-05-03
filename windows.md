@@ -46,7 +46,7 @@ DISM /Online /Cleanup-Image /RestoreHealth  #如果系统文件检查器发现�
 windows激活命令
 irm https://get.activated.win iex
 irm https://massgrave.dev/get | iex
-
+start ms-cxh:localonly  绕过 Microsoft 帐户要求 Shift+F10键盘组合打开 Windows 命令提示符
 format /q C:   #快速格式C盘
 windows11 开启创建本地账号：Shift + f10 输入 oobe\bypassnro 后重启
 
