@@ -36,7 +36,7 @@ log_error() { printf "${RED}[-] %s${NC}\n" "$1"; }
 log_warning() { printf "${YELLOW}[!] %s${NC}\n" "$1"; }
 
 # 公钥URL和SSH配置文件路径
-PUB_KEY_URL="https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/id_rsa.pub.txt"
+PUB_KEY_URL="https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/id_ceshi.txt"
 SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
 
 #----------------------------------------------------------------
