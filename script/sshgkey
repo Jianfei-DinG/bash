@@ -1,138 +1,176 @@
 #!/bin/sh
 
 #================================================================
-#   一键添加SSH公钥并禁止密码登录脚本 (终极兼容版)
+#   一键部署SSH公钥并强化安全配置 (专业逻辑版)
 #
-#   兼容性:
-#   - 完全兼容 sh 和 bash
-#   - 自动检测并使用 curl 或 wget
-#   - 适用于所有主流 Linux 发行版
-#
+#   作者: Gemini (根据用户建议优化)
+#   流程:
+#   1. 权限检测 (Root/Sudo)。
+#   2. 系统环境检测 (OS信息)。
+#   3. 操作用户检测 (确定公钥添加给谁)。
+#   4. 系统级SSH服务配置 (修改 sshd_config)。
+#   5. 用户级公钥配置 (下载并添加公钥)。
+#   6. 重启服务使配置生效。
 #================================================================
 
-# 定义颜色 (在不支持-e的sh中可能会显示为纯文本，但不影响功能)
+#----------------------------------------------------------------
+# 全局变量和工具函数
+#----------------------------------------------------------------
+
+# 定义颜色以便输出，使用printf保证最大兼容性
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
-NC='\033[0m' # No Color
+NC='\033[0m'
 
-# 使用printf以获得最佳兼容性
-log_info() {
-    printf "[*] %s\n" "$1"
-}
-log_success() {
-    printf "${GREEN}[+] %s${NC}\n" "$1"
-}
-log_error() {
-    printf "${RED}[-] %s${NC}\n" "$1"
-}
-log_warning() {
-    printf "${YELLOW}[!] %s${NC}\n" "$1"
-}
+log_step() { printf "\n--- %s ---\n" "$1"; }
+log_info() { printf "[*] %s\n" "$1"; }
+log_success() { printf "${GREEN}[+] %s${NC}\n" "$1"; }
+log_error() { printf "${RED}[-] %s${NC}\n" "$1"; }
+log_warning() { printf "${YELLOW}[!] %s${NC}\n" "$1"; }
 
-# 脚本开始
-log_info "脚本开始执行..."
-set -e # 任何命令失败则立即退出
-
-# 公钥URL
+# 公钥URL和SSH配置文件路径
 PUB_KEY_URL="https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/id_rsa.pub.txt"
-
-# 1. 获取公钥
-log_info "正在从 $PUB_KEY_URL 获取公钥..."
-if command -v curl >/dev/null 2>&1; then
-    PUB_KEY=$(curl -sSL "$PUB_KEY_URL")
-else
-    PUB_KEY=$(wget -qO- "$PUB_KEY_URL")
-fi
-
-if [ -z "$PUB_KEY" ]; then
-    log_error "无法获取公钥。请确保系统已安装 curl 或 wget，并且网络连接正常。"
-    exit 1
-fi
-log_success "公钥获取成功。"
-
-# 2. 确定用户和家目录
-if [ "$(id -u)" -eq 0 ]; then
-    USER_HOME="/root"
-    log_info "检测到当前为 root 用户。"
-else
-    USER_HOME="$HOME"
-    log_info "检测到当前为普通用户: $(whoami)。"
-fi
-
-SSH_DIR="$USER_HOME/.ssh"
-AUTHORIZED_KEYS_FILE="$SSH_DIR/authorized_keys"
-
-# 3. 创建目录和文件，并设置权限
-log_info "正在配置SSH目录和文件权限..."
-mkdir -p "$SSH_DIR"
-log_info "确保目录 $SSH_DIR 存在。"
-touch "$AUTHORIZED_KEYS_FILE"
-log_info "确保文件 $AUTHORIZED_KEYS_FILE 存在。"
-
-chmod 700 "$SSH_DIR"
-log_info "设置目录 $SSH_DIR 权限为 700。"
-chmod 600 "$AUTHORIZED_KEYS_FILE"
-log_info "设置文件 $AUTHORIZED_KEYS_FILE 权限为 600。"
-log_success "目录和文件权限设置完成。"
-
-# 4. 添加公钥 (使用 sh/bash 完全兼容的 grep)
-log_info "正在检查并添加公钥..."
-# 使用-F将key作为固定字符串匹配，-q静默模式，这是最稳健的兼容性写法
-if ! grep -Fq "$PUB_KEY" "$AUTHORIZED_KEYS_FILE"; then
-    echo "$PUB_KEY" >> "$AUTHORIZED_KEYS_FILE"
-    log_success "公钥已成功添加到 $AUTHORIZED_KEYS_FILE 文件中。"
-else
-    log_warning "公钥已存在于 $AUTHORIZED_KEYS_FILE 文件中，无需重复添加。"
-fi
-
-# 5. 修改SSH配置
-# ... 后续修改sshd_config和重启服务的部分已经是兼容的，无需改动 ...
-SUDO_CMD=""
-if [ "$(id -u)" -ne 0 ]; then
-    if command -v sudo >/dev/null 2>&1; then
-        SUDO_CMD="sudo"
-        log_info "检测到sudo命令，将使用sudo执行特权操作。"
-    else
-        log_warning "当前用户不是root，且未找到sudo命令。无法自动修改SSH配置。"
-        exit 0
-    fi
-fi
-
 SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
-log_info "正在修改SSH配置文件: $SSHD_CONFIG_FILE ..."
-$SUDO_CMD sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' "$SSHD_CONFIG_FILE" [1, 2, 5, 9]
-$SUDO_CMD sed -i 's/^#*PermitRootLogin .*/PermitRootLogin prohibit-password/' "$SSHD_CONFIG_FILE" [1, 2, 5, 9]
-log_success "SSH配置文件修改成功，已设置为禁止密码登录。"
 
-# 6. 重启SSH服务
-log_info "正在尝试重启SSH服务..."
-RESTARTED=0
-if command -v systemctl >/dev/null 2>&1; then
-    if $SUDO_CMD systemctl restart sshd >/dev/null 2>&1; then
-        log_success "SSH服务重启成功 (使用 systemctl restart sshd)。"
-        RESTARTED=1
-    elif $SUDO_CMD systemctl restart ssh >/dev/null 2>&1; then
-        log_success "SSH服务重启成功 (使用 systemctl restart ssh)。"
-        RESTARTED=1
+#----------------------------------------------------------------
+# 脚本核心功能函数 (按执行顺序排列)
+#----------------------------------------------------------------
+
+# 步骤 1: 权限检测
+check_privileges() {
+    log_step "步骤 1: 权限检测"
+    if [ "$(id -u)" -eq 0 ]; then
+        SUDO_CMD="" # 如果是root用户，sudo命令为空
+        log_info "当前以 root 用户身份运行。"
+    elif command -v sudo >/dev/null 2>&1; then
+        SUDO_CMD="sudo" # 如果是普通用户但有sudo，则设置sudo命令
+        log_info "检测到 sudo 命令，将使用它来执行特权操作。"
+    else
+        log_error "此脚本需要 root 权限或 sudo 命令来修改系统配置。"
+        log_error "请以 root 用户身份重新运行，或为当前用户安装并配置 sudo。"
+        exit 1
     fi
-fi
+}
 
-if [ "$RESTARTED" -eq 0 ] && command -v service >/dev/null 2>&1; then
-    if $SUDO_CMD service sshd restart >/dev/null 2>&1; then
-        log_success "SSH服务重启成功 (使用 service sshd restart)。"
-        RESTARTED=1
-    elif $SUDO_CMD service ssh restart >/dev/null 2>&1; then
-        log_success "SSH服务重启成功 (使用 service ssh restart)。"
-        RESTARTED=1
+# 步骤 2: 检测操作系统
+detect_os() {
+    log_step "步骤 2: 操作系统检测"
+    if [ -f /etc/os-release ]; then
+        . /etc/os-release
+        OS_INFO="$PRETTY_NAME"
+    elif [ -f /etc/redhat-release ]; then
+        OS_INFO=$(cat /etc/redhat-release)
+    else
+        OS_INFO=$(uname -s)
     fi
-fi
+    log_success "检测到系统为: ${OS_INFO}"
+}
 
-if [ "$RESTARTED" -eq 0 ]; then
-    log_error "自动重启SSH服务失败！请手动重启。"
-else
-    log_success "所有操作已成功完成！"
-fi
+# 步骤 3: 确定目标用户
+check_current_user() {
+    log_step "步骤 3: 目标用户检测"
+    if [ "$(id -u)" -eq 0 ]; then
+        USER_HOME="/root"
+        log_info "公钥将为 [root] 用户添加。"
+    else
+        # 在有sudo的情况下，HOME可能指向root，所以用logname或whoami更可靠
+        CURRENT_USER=$(logname 2>/dev/null || whoami)
+        USER_HOME=$(eval echo "~$CURRENT_USER")
+        log_info "公钥将为 [${CURRENT_USER}] 用户添加。"
+    fi
+    # 定义全局变量给后续函数使用
+    SSH_DIR="$USER_HOME/.ssh"
+    AUTHORIZED_KEYS_FILE="$SSH_DIR/authorized_keys"
+}
 
-echo ""
-log_warning "重要提示：请务必拥有公钥对应的私钥，否则将无法再次登录！"
+# 步骤 4: 配置SSH服务
+configure_ssh_server() {
+    log_step "步骤 4: 配置系统级SSH服务"
+    log_info "备份SSH配置文件到 ${SSHD_CONFIG_FILE}.bak.$(date +%F)..."
+    $SUDO_CMD cp "$SSHD_CONFIG_FILE" "$SSHD_CONFIG_FILE.bak.$(date +%F)"
+
+    log_info "强化SSH配置：开启密钥认证，禁止密码登录..."
+    $SUDO_CMD sed -i 's/^#*PubkeyAuthentication .*/PubkeyAuthentication yes/' "$SSHD_CONFIG_FILE"
+    $SUDO_CMD sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' "$SSHD_CONFIG_FILE"
+    $SUDO_CMD sed -i 's/^#*PermitRootLogin .*/PermitRootLogin prohibit-password/' "$SSHD_CONFIG_FILE" [1, 2, 5, 9]
+
+    # 验证并确保配置已生效
+    if ! $SUDO_CMD grep -q "^PasswordAuthentication no" "$SSHD_CONFIG_FILE"; then
+       echo "PasswordAuthentication no" | $SUDO_CMD tee -a "$SSHD_CONFIG_FILE" > /dev/null
+    fi
+    log_success "SSH服务配置强化完成。"
+}
+
+# 步骤 5: 添加用户公钥
+add_public_key() {
+    log_step "步骤 5: 配置用户级SSH公钥"
+    log_info "确保目录 ${SSH_DIR} 存在并设置权限..."
+    mkdir -p "$SSH_DIR"
+    chmod 700 "$SSH_DIR"
+
+    log_info "确保文件 ${AUTHORIZED_KEYS_FILE} 存在并设置权限..."
+    touch "$AUTHORIZED_KEYS_FILE"
+    chmod 600 "$AUTHORIZED_KEYS_FILE"
+
+    log_info "从云端获取公钥..."
+    if command -v curl >/dev/null 2>&1; then
+        PUB_KEY=$(curl -sSL "$PUB_KEY_URL")
+    elif command -v wget >/dev/null 2>&1; then
+        PUB_KEY=$(wget -qO- "$PUB_KEY_URL")
+    else
+        log_error "系统中未找到 curl 或 wget，无法下载公钥。"
+        exit 1
+    fi
+
+    if [ -z "$PUB_KEY" ]; then
+        log_error "从URL获取公钥失败，内容为空。"
+        exit 1
+    fi
+
+    if ! grep -Fq "$PUB_KEY" "$AUTHORIZED_KEYS_FILE"; then
+        echo "$PUB_KEY" >> "$AUTHORIZED_KEYS_FILE"
+        log_success "公钥已成功写入授权文件。"
+    else
+        log_warning "公钥已存在，无需重复添加。"
+    fi
+}
+
+# 步骤 6: 重启服务
+restart_ssh_service() {
+    log_step "步骤 6: 重启SSH服务以应用所有更改"
+    RESTARTED=0
+    if command -v systemctl >/dev/null 2>&1; then
+        if $SUDO_CMD systemctl restart sshd >/dev/null 2>&1; then RESTARTED=1; SERVICE_CMD="systemctl restart sshd"; fi
+    fi
+    if [ "$RESTARTED" -eq 0 ] && command -v service >/dev/null 2>&1; then
+        if $SUDO_CMD service sshd restart >/dev/null 2>&1; then RESTARTED=1; SERVICE_CMD="service sshd restart";
+        elif $SUDO_CMD service ssh restart >/dev/null 2>&1; then RESTARTED=1; SERVICE_CMD="service ssh restart"; fi
+    fi
+
+    if [ "$RESTARTED" -eq 1 ]; then
+        log_success "SSH服务重启成功 (使用命令: ${SERVICE_CMD})。"
+    else
+        log_error "自动重启SSH服务失败！请手动重启。"
+    fi
+}
+
+#----------------------------------------------------------------
+# 主函数，按最佳实践顺序调度所有操作
+#----------------------------------------------------------------
+main() {
+    # 严格按照指定顺序执行
+    check_privileges
+    detect_os
+    check_current_user
+    configure_ssh_server
+    add_public_key
+    restart_ssh_service
+
+    echo ""
+    log_success "部署完成！"
+    log_warning "服务器已禁止密码登录。请务必使用与公钥匹配的私钥进行连接！"
+}
+
+# 运行主函数
+main
