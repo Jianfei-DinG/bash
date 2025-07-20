@@ -1,0 +1,170 @@
+#!/bin/sh
+
+#================================================================
+#================================================================
+#   一键部署SSH公钥并强化安全配置 (专业逻辑版)
+#
+#   作者: Gemini (根据用户建议优化)
+#   流程:
+#   1. 权限检测 (Root/Sudo)。
+#   2. 系统环境检测 (OS信息)。
+#   3. 操作用户检测 (确定公钥添加给谁)。
+#   4. 系统级SSH服务配置 (修改 sshd_config)。
+#   5. 用户级公钥配置 (下载并添加公钥)。
+#   6. 重启服务使配置生效。
+#================================================================
+#   一键部署SSH公钥并强化安全配置 (V3 - 带动态注释)
+#
+#   新功能:
+#   - 在添加公钥时，自动附加一个包含部署信息的注释。
+#   - (其他功能和逻辑保持不变)
+#================================================================
+
+# ... (前面的函数 log_info, check_privileges, detect_os等保持不变) ...
+
+# 定义颜色以便输出
+GREEN='\033[0;32m'
+RED='\033[0;31m'
+YELLOW='\033[0;33m'
+CYAN='\033[0;36m'
+NC='\033[0m'
+
+log_step() { printf "\n--- %s ---\n" "$1"; }
+log_info() { printf "[*] %s\n" "$1"; }
+log_success() { printf "${GREEN}[+] %s${NC}\n" "$1"; }
+log_error() { printf "${RED}[-] %s${NC}\n" "$1"; }
+log_warning() { printf "${YELLOW}[!] %s${NC}\n" "$1"; }
+
+# 公钥URL和SSH配置文件路径
+PUB_KEY_URL="https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/id_rsa.pub.txt"
+SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
+
+#----------------------------------------------------------------
+# 脚本核心功能函数
+#----------------------------------------------------------------
+
+# 步骤 1: 环境诊断与前置检查
+pre_flight_check() {
+    log_step "步骤 1: 环境诊断 & 前置检查"
+
+    # --- 权限检测 ---
+    if [ "$(id -u)" -eq 0 ]; then
+        SUDO_CMD=""
+    elif command -v sudo >/dev/null 2>&1; then
+        SUDO_CMD="sudo"
+    else
+        log_error "此脚本需要 root 权限或 sudo 命令。"; exit 1
+    fi
+    
+    # --- 系统与用户检测 ---
+    if [ -f /etc/os-release ]; then . /etc/os-release; OS_INFO="$PRETTY_NAME"; else OS_INFO=$(uname -s); fi
+    if [ "$(id -u)" -eq 0 ]; then CURRENT_USER="root"; else CURRENT_USER=$(logname 2>/dev/null || whoami); fi
+    USER_HOME=$(eval echo "~$CURRENT_USER")
+    AUTHORIZED_KEYS_FILE="$USER_HOME/.ssh/authorized_keys"
+
+    # --- 打印综合诊断报告 ---
+    printf "${CYAN}================ 诊断报告 ================ \n"
+    printf "  系统平台: %s\n" "$OS_INFO"
+    printf "  目标用户: %s\n" "$CURRENT_USER"
+    printf "${CYAN}========================================== \n${NC}"
+    
+    # --- 核心检查: 公钥是否存在 ---
+    log_info "正在从云端获取目标公钥以进行比对..."
+    if command -v curl >/dev/null 2>&1; then
+        PUB_KEY_FROM_URL=$(curl -sSL "$PUB_KEY_URL")
+    elif command -v wget >/dev/null 2>&1; then
+        PUB_KEY_FROM_URL=$(wget -qO- "$PUB_KEY_URL")
+    else
+        log_error "系统中未找到 curl 或 wget，无法下载公钥。"; exit 1
+    fi
+    if [ -z "$PUB_KEY_FROM_URL" ]; then log_error "获取公钥失败，无法继续。"; exit 1; fi
+
+    CORE_KEY=$(echo "$PUB_KEY_FROM_URL" | cut -d' ' -f1,2)
+
+    if [ -f "$AUTHORIZED_KEYS_FILE" ] && grep -Fq "$CORE_KEY" "$AUTHORIZED_KEYS_FILE"; then
+        KEY_COUNT=$(wc -l < "$AUTHORIZED_KEYS_FILE")
+        log_success "检查完成：目标公钥已存在于用户的授权文件中。"
+        log_info "路径: $AUTHORIZED_KEYS_FILE"
+        log_info "当前文件内共有 ${KEY_COUNT} 个密钥。"
+        log_warning "无需再次添加，脚本将立即退出。"
+        exit 0
+    fi
+    
+    log_info "检查完成：目标公钥不存在，准备执行添加和配置流程..."
+    # 将获取到的公钥和用户信息传递给后续函数
+    export CORE_KEY
+    export SUDO_CMD
+    export AUTHORIZED_KEYS_FILE
+}
+
+# 步骤 2: 配置系统级SSH服务
+configure_ssh_server() {
+    log_step "步骤 2: 配置系统级SSH服务"
+    log_info "备份SSH配置文件..."
+    $SUDO_CMD cp "$SSHD_CONFIG_FILE" "$SSHD_CONFIG_FILE.bak.$(date +%F)"
+
+    log_info "强化SSH配置（开启密钥认证，禁止密码登录）..."
+    $SUDO_CMD sed -i 's/^#*PubkeyAuthentication .*/PubkeyAuthentication yes/' "$SSHD_CONFIG_FILE"
+    $SUDO_CMD sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' "$SSHD_CONFIG_FILE"
+    $SUDO_CMD sed -i 's/^#*PermitRootLogin .*/PermitRootLogin prohibit-password/' "$SSHD_CONFIG_FILE"
+    
+    log_success "SSH服务配置强化完成。"
+}
+
+# 步骤 3: 添加用户公钥
+add_public_key() {
+    log_step "步骤 3: 添加用户级SSH公钥"
+    SSH_DIR=$(dirname "$AUTHORIZED_KEYS_FILE")
+    
+    log_info "确保目录 ${SSH_DIR} 存在并设置权限..."
+    mkdir -p "$SSH_DIR"; chmod 700 "$SSH_DIR"
+
+    log_info "确保文件 ${AUTHORIZED_KEYS_FILE} 存在并设置权限..."
+    touch "$AUTHORIZED_KEYS_FILE"; chmod 600 "$AUTHORIZED_KEYS_FILE"
+
+    NEW_COMMENT="added_by_script@$(hostname)"
+    FINAL_KEY_ENTRY="$CORE_KEY $NEW_COMMENT"
+    
+    echo "$FINAL_KEY_ENTRY" >> "$AUTHORIZED_KEYS_FILE"
+    log_success "公钥已成功添加，并附带注释: $NEW_COMMENT"
+}
+
+# 步骤 4: 重启服务
+restart_ssh_service() {
+    log_step "步骤 4: 重启SSH服务以应用配置"
+    RESTARTED=0; SERVICE_CMD="未知";
+    if command -v systemctl >/dev/null 2>&1; then
+        if $SUDO_CMD systemctl restart sshd >/dev/null 2>&1; then RESTARTED=1; SERVICE_CMD="systemctl restart sshd";
+        elif $SUDO_CMD systemctl restart ssh >/dev/null 2>&1; then RESTARTED=1; SERVICE_CMD="systemctl restart ssh"; fi
+    fi
+    if [ "$RESTARTED" -eq 0 ] && command -v service >/dev/null 2>&1; then
+        if $SUDO_CMD service sshd restart >/dev/null 2>&1; then RESTARTED=1; SERVICE_CMD="service sshd restart";
+        elif $SUDO_CMD service ssh restart >/dev/null 2>&1; then RESTARTED=1; SERVICE_CMD="service ssh restart"; fi
+    fi
+
+    if [ "$RESTARTED" -eq 1 ]; then
+        log_success "SSH服务重启成功 (使用命令: ${SERVICE_CMD})。"
+    else
+        log_error "自动重启SSH服务失败！请手动重启。"
+    fi
+}
+
+#----------------------------------------------------------------
+# 主函数
+#----------------------------------------------------------------
+main() {
+    # 步骤 1: 执行诊断和前置检查。如果公钥已存在，此函数会直接退出脚本。
+    pre_flight_check
+
+    # 只有在公钥不存在时，才会执行到这里
+    configure_ssh_server
+    add_public_key
+    restart_ssh_service
+    
+    echo ""
+    log_success "部署完成！"
+    log_warning "服务器已禁止密码登录。请务必使用与公钥匹配的私钥进行连接！"
+}
+
+# 运行主函数
+main
