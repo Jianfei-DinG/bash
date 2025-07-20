@@ -71,7 +71,7 @@ configure_ssh_server() {
     log_info "强化SSH配置..."
     $SUDO_CMD sed -i 's/^#*PubkeyAuthentication .*/PubkeyAuthentication yes/' "$SSHD_CONFIG_FILE"
     $SUDO_CMD sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' "$SSHD_CONFIG_FILE"
-    $SUDO_CMD sed -i 's/^#*PermitRootLogin .*/PermitRootLogin prohibit-password/' "$SSHD_CONFIG_FILE" [1, 2, 5, 9]
+    $SUDO_CMD sed -i 's/^#*PermitRootLogin .*/PermitRootLogin prohibit-password/' "$SSHD_CONFIG_FILE"
     log_success "SSH服务配置强化完成。"
 }
 
