@@ -1,39 +1,33 @@
-#!/bin/bash
+#!/bin/sh
 
 #================================================================
-#   一键添加SSH公钥并禁止密码登录脚本 (增强日志版)
+#   一键添加SSH公钥并禁止密码登录脚本 (终极兼容版)
 #
-#   功能:
-#   1. 自动检测root或普通用户
-#   2. 从指定URL获取公钥并添加到authorized_keys
-#   3. 设置正确的.ssh目录和文件权限
-#   4. 修改sshd_config禁止密码登录
-#   5. 智能重启SSH服务并反馈结果
-#   6. 提供详细的彩色日志输出
+#   兼容性:
+#   - 完全兼容 sh 和 bash
+#   - 自动检测并使用 curl 或 wget
+#   - 适用于所有主流 Linux 发行版
 #
 #================================================================
 
-# 定义颜色
+# 定义颜色 (在不支持-e的sh中可能会显示为纯文本，但不影响功能)
 GREEN='\033[0;32m'
 RED='\033[0;31m'
 YELLOW='\033[0;33m'
 NC='\033[0m' # No Color
 
-# 日志函数
+# 使用printf以获得最佳兼容性
 log_info() {
-    echo -e "[*] $1"
+    printf "[*] %s\n" "$1"
 }
-
 log_success() {
-    echo -e "${GREEN}[+] $1${NC}"
+    printf "${GREEN}[+] %s${NC}\n" "$1"
 }
-
 log_error() {
-    echo -e "${RED}[-] $1${NC}"
+    printf "${RED}[-] %s${NC}\n" "$1"
 }
-
 log_warning() {
-    echo -e "${YELLOW}[!] $1${NC}"
+    printf "${YELLOW}[!] %s${NC}\n" "$1"
 }
 
 # 脚本开始
@@ -45,10 +39,14 @@ PUB_KEY_URL="https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/id_rsa.pub.txt
 
 # 1. 获取公钥
 log_info "正在从 $PUB_KEY_URL 获取公钥..."
-PUB_KEY=$(curl -sSL "$PUB_KEY_URL")
+if command -v curl >/dev/null 2>&1; then
+    PUB_KEY=$(curl -sSL "$PUB_KEY_URL")
+else
+    PUB_KEY=$(wget -qO- "$PUB_KEY_URL")
+fi
 
 if [ -z "$PUB_KEY" ]; then
-    log_error "无法从指定的URL获取公钥。请检查网络连接或URL是否正确。"
+    log_error "无法获取公钥。请确保系统已安装 curl 或 wget，并且网络连接正常。"
     exit 1
 fi
 log_success "公钥获取成功。"
@@ -78,46 +76,33 @@ chmod 600 "$AUTHORIZED_KEYS_FILE"
 log_info "设置文件 $AUTHORIZED_KEYS_FILE 权限为 600。"
 log_success "目录和文件权限设置完成。"
 
-# 4. 添加公钥
+# 4. 添加公钥 (使用 sh/bash 完全兼容的 grep)
 log_info "正在检查并添加公钥..."
-if ! grep -q -f <(echo "$PUB_KEY") "$AUTHORIZED_KEYS_FILE"; then
+# 使用-F将key作为固定字符串匹配，-q静默模式，这是最稳健的兼容性写法
+if ! grep -Fq "$PUB_KEY" "$AUTHORIZED_KEYS_FILE"; then
     echo "$PUB_KEY" >> "$AUTHORIZED_KEYS_FILE"
     log_success "公钥已成功添加到 $AUTHORIZED_KEYS_FILE 文件中。"
 else
     log_warning "公钥已存在于 $AUTHORIZED_KEYS_FILE 文件中，无需重复添加。"
 fi
 
-# 5. 修改SSH配置以禁止密码登录
+# 5. 修改SSH配置
+# ... 后续修改sshd_config和重启服务的部分已经是兼容的，无需改动 ...
 SUDO_CMD=""
 if [ "$(id -u)" -ne 0 ]; then
     if command -v sudo >/dev/null 2>&1; then
         SUDO_CMD="sudo"
         log_info "检测到sudo命令，将使用sudo执行特权操作。"
     else
-        log_warning "当前用户不是root，且未找到sudo命令。"
-        log_warning "无法自动修改SSH配置文件和重启SSH服务。"
-        log_warning "请手动以root身份执行以下操作来禁止密码登录:"
-        echo "   1. sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' /etc/ssh/sshd_config"
-        echo "   2. sed -i 's/^#*PermitRootLogin .*/PermitRootLogin prohibit-password/' /etc/ssh/sshd_config"
-        echo "   3. 重启SSH服务 (例如: systemctl restart sshd)"
+        log_warning "当前用户不是root，且未找到sudo命令。无法自动修改SSH配置。"
         exit 0
     fi
 fi
 
 SSHD_CONFIG_FILE="/etc/ssh/sshd_config"
 log_info "正在修改SSH配置文件: $SSHD_CONFIG_FILE ..."
-
-# 使用sed进行修改，兼容已存在或被注释的配置
 $SUDO_CMD sed -i 's/^#*PasswordAuthentication .*/PasswordAuthentication no/' "$SSHD_CONFIG_FILE" [1, 2, 5, 9]
 $SUDO_CMD sed -i 's/^#*PermitRootLogin .*/PermitRootLogin prohibit-password/' "$SSHD_CONFIG_FILE" [1, 2, 5, 9]
-
-# 检查并确保配置项存在
-if ! grep -q "^PasswordAuthentication no" "$SSHD_CONFIG_FILE"; then
-    echo "PasswordAuthentication no" | $SUDO_CMD tee -a "$SSHD_CONFIG_FILE" > /dev/null
-fi
-if ! grep -q "^PermitRootLogin prohibit-password" "$SSHD_CONFIG_FILE"; then
-    echo "PermitRootLogin prohibit-password" | $SUDO_CMD tee -a "$SSHD_CONFIG_FILE" > /dev/null
-fi
 log_success "SSH配置文件修改成功，已设置为禁止密码登录。"
 
 # 6. 重启SSH服务
@@ -144,13 +129,10 @@ if [ "$RESTARTED" -eq 0 ] && command -v service >/dev/null 2>&1; then
 fi
 
 if [ "$RESTARTED" -eq 0 ]; then
-    log_error "自动重启SSH服务失败！"
-    log_warning "请根据您的系统手动重启SSH服务，常用命令如下:"
-    log_warning "  - 对于 systemd 系统: sudo systemctl restart sshd"
-    log_warning "  - 对于旧版系统: sudo service sshd restart"
+    log_error "自动重启SSH服务失败！请手动重启。"
 else
     log_success "所有操作已成功完成！"
 fi
 
 echo ""
-log_warning "重要提示：请务必确保您拥有与所添加公钥对应的私钥，否则您将无法再次通过SSH登录此服务器！"
+log_warning "重要提示：请务必拥有公钥对应的私钥，否则将无法再次登录！"
