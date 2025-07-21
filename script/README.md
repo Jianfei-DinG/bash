@@ -2,9 +2,29 @@
 
 <hr style="border: none; height: 1px; background-color: green;">
 
+- [CMD生成安全最高的SSH密钥](#0) &nbsp;&nbsp;&nbsp;&nbsp;
 - [一键添加SSH密钥](#1) &nbsp;&nbsp;&nbsp;&nbsp;
 - [将用户添加到 sudo 组里方便使用 sudo -i](#2) &nbsp;&nbsp;&nbsp;&nbsp;
 
+<hr style="border: none; height: 1px; background-color: green;">
+
+</details>
+<hr style="border: none; height: 1px; background-color: green;">
+<details>  
+<summary>CMD生成安全最高的SSH密钥</summary> 
+<a name="2"></a>
+  
+```
+ssh-keygen -t ed25519 -a 100 -f %USERPROFILE%\.ssh\id_rsa
+```
+示例：
+```
+Generating public/private rsa key pair.
+Enter file in which to save the key (C:\Users\你的用户名\.ssh\id_rsa):  ← 按回车即可（使用默认）
+Enter passphrase (empty for no passphrase):                           ← 通常直接回车（设置密码安全性最高）
+Enter same passphrase again:                                          ← 再次回车 （设置密码安全性最高）
+```
+</details>
 <hr style="border: none; height: 1px; background-color: green;">
 <details>  
 <summary>一键添加SSH密钥</summary> 
