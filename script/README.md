@@ -18,6 +18,11 @@ MCD执行
 ```
 ssh-keygen -t ed25519 -a 100 -f %USERPROFILE%\.ssh\id_rsa -C "tianyun@Windows"
 ```
+同步公钥
+```
+type %USERPROFILE%\.ssh\id_rsa.pub | ssh root@192.168.1.8 "cat >> .ssh/authorized_keys"
+```
+
 Linux 一键执行命令
 ```
 ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_rsa -C "local@machine" && ssh-copy-id -i ~/.ssh/id_rsa.pub $USER@localhost
