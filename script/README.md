@@ -17,6 +17,14 @@ sh <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_inst
 ```
 bash <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_installer.sh)
 ```
+Ubuntu / Debian 安装 sudo 和 curl
+```
+apt update && apt install -y sudo curl
+```
+Alpine Linux 安装 sudo 和 curl
+```
+apk update && apk add sudo curl
+```
 </details>
 <hr style="border: none; height: 1px; background-color: green;">
 <details>  
