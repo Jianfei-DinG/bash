@@ -3,6 +3,7 @@
 <hr style="border: none; height: 1px; background-color: green;">
 
 - [一键添加SSH密钥](#1) &nbsp;&nbsp;&nbsp;&nbsp;
+- [将用户添加到 sudo 里方便使用 sudo -i](#2) &nbsp;&nbsp;&nbsp;&nbsp;
 
 <hr style="border: none; height: 1px; background-color: green;">
 <details>  
@@ -16,5 +17,15 @@ sh <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_inst
 ```
 bash <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_installer.sh)
 ```
+</details>
+<hr style="border: none; height: 1px; background-color: green;">
+<details>  
+<summary>将用户添加到 sudo 里方便使用 sudo -i</summary> 
+<a name="2"></a>
+  
+```
+usermod -aG sudo "$(whoami)"
+```
+
 </details>
 <hr style="border: none; height: 1px; background-color: green;">
