@@ -26,8 +26,8 @@ bash <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_in
 ```
 usermod -aG sudo "$(whoami)"
 ```
-`
+``
 命令执行后需要重新连接才能生效
-`
+``
 </details>
 <hr style="border: none; height: 1px; background-color: green;">
