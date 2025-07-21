@@ -14,15 +14,21 @@
 <summary>CMD生成安全最高的SSH密钥</summary> 
 <a name="2"></a>
   
+MCD执行  
 ```
 ssh-keygen -t ed25519 -a 100 -f %USERPROFILE%\.ssh\id_rsa -C "tianyun@Windows"
 ```
+Linux 一键执行命令
+```
+ssh-keygen -t ed25519 -a 100 -f ~/.ssh/id_rsa -C "local@machine" && ssh-copy-id -i ~/.ssh/id_rsa.pub $USER@localhost
+```
+
 示例：
 ```
 Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\你的用户名\.ssh\id_rsa):  ← 按回车即可（使用默认）
-Enter passphrase (empty for no passphrase):                           ← 通常直接回车（设置密码安全性最高）
-Enter same passphrase again:                                          ← 再次回车 （设置密码安全性最高）
+Enter passphrase (empty for no passphrase):                           ←  输入私钥密码（可为空））
+Enter same passphrase again:                                          ←  再次确认密码
 
 id_rsa（私钥-客户端）
 id_rsa.pub（公钥-服务端）
