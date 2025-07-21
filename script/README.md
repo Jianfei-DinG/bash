@@ -15,7 +15,7 @@
 <a name="2"></a>
   
 ```
-ssh-keygen -t ed25519 -a 100 -f %USERPROFILE%\.ssh\id_rsa
+ssh-keygen -t ed25519 -a 100 -f %USERPROFILE%\.ssh\id_rsa -C "tianyun@Windows"
 ```
 示例：
 ```
@@ -23,6 +23,9 @@ Generating public/private rsa key pair.
 Enter file in which to save the key (C:\Users\你的用户名\.ssh\id_rsa):  ← 按回车即可（使用默认）
 Enter passphrase (empty for no passphrase):                           ← 通常直接回车（设置密码安全性最高）
 Enter same passphrase again:                                          ← 再次回车 （设置密码安全性最高）
+
+id_rsa（私钥-客户端）
+id_rsa.pub（公钥-服务端）
 ```
 </details>
 <hr style="border: none; height: 1px; background-color: green;">
