@@ -66,7 +66,7 @@ apk update && apk add sudo curl
 <a name="2"></a>
   
 ```
-usermod -aG sudo "$(whoami)"
+sudo usermod -aG sudo "$(whoami)"
 ```
 ``
 命令执行后需要重新连接才能生效
