@@ -53,7 +53,7 @@ bash <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_in
 ```
 Ubuntu / Debian 安装 sudo 和 curl
 ```
-apt update && apt install -y sudo curl sudo
+apt update && apt install -y sudo curl
 ```
 Alpine Linux 安装 sudo 和 curl
 ```
