@@ -270,7 +270,7 @@ Wetty
 <hr style="border: none; height: 1px; background-color: green;">
 <details>
   
-  <summary>修改系统时区</summary>
+  <summary>修改系统时区和系统支持语言</summary>
 
  修改时区
 ```
