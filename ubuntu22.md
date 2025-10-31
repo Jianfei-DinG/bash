@@ -290,9 +290,17 @@ sudo reboot
 ```
 
 ```
-echo 'LANG=zh_CN.UTF-8' | sudo tee /etc/default/locale > /dev/null
+sudo tee /etc/default/locale > /dev/null << 'EOF'
+LANG="zh_CN.UTF-8"
+LANGUAGE="zh_CN:zh"
+LC_ALL="zh_CN.UTF-8"
+EOF
 ```
-source /etc/default/locale  #重新加载
+# 立即生效（当前会话）
+source /etc/default/locale
+
+# 或者重启系统确保永久生效
+sudo reboot
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
