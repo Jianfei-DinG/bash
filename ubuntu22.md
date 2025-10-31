@@ -296,11 +296,12 @@ LANGUAGE="zh_CN:zh"
 LC_ALL="zh_CN.UTF-8"
 EOF
 ```
-# 立即生效（当前会话）
+立即生效（当前会话）
 source /etc/default/locale
 
-# 或者重启系统确保永久生效
+ 或者重启系统确保永久生效
 sudo reboot
+
 </details>
 
 <hr style="border: none; height: 1px; background-color: green;">
