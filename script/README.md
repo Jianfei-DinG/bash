@@ -5,6 +5,7 @@
 - [CMD生成安全最高的SSH密钥](#0) &nbsp;&nbsp;&nbsp;&nbsp;
 - [一键添加SSH密钥](#1) &nbsp;&nbsp;&nbsp;&nbsp;
 - [将用户添加到 sudo 组里方便使用 sudo -i](#2) &nbsp;&nbsp;&nbsp;&nbsp;
+- [BBR开启网络优化一键脚本](#3) &nbsp;&nbsp;&nbsp;&nbsp;
 
 <hr style="border: none; height: 1px; background-color: green;">
 
@@ -73,3 +74,12 @@ sudo usermod -aG sudo "$(whoami)"
 ``
 </details>
 <hr style="border: none; height: 1px; background-color: green;">
+<details>  
+<summary>BBR开启网络优化一键脚本</summary> 
+<a name="3"></a>
+  
+```
+bash <(wget -qO- https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/enable-bbr.sh)
+```
+
+</details>
