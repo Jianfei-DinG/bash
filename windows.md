@@ -25,6 +25,9 @@ PowerShell 命令
 ```
 Get-ChildItem -Path "D:\wow\_classic_\Interface\AddOns\ZygorGuidesViewer\*" -File -Recurse | Select-String -Pattern "七天免费"
 
+Get-ChildItem "D:\f\wow\_classic_\Interface\AddOns\ZygorGuidesViewer\" -File -Recurse | % { Select-String -Path $_.FullName -Pattern "七天免费" -ErrorAction SilentlyContinue }
+
+
 ```
 
 CMD命令 (中文字节不兼容）
