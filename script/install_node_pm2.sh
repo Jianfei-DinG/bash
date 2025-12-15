@@ -6,7 +6,7 @@ echo "====== 1. 安装 nvm ======"
 export NVM_DIR="$HOME/.nvm"
 
 if [ ! -d "$NVM_DIR" ]; then
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
+  wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
 else
   echo "nvm 已存在，跳过安装"
 fi
@@ -41,6 +41,7 @@ echo "====== 5. 安装 PM2 ======"
 npm install -g pm2@latest
 
 echo "====== 6. 验证 PM2 ======"
+
 pm2 -v
 
 echo "✅ 全部完成"
