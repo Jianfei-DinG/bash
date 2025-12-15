@@ -6,6 +6,7 @@
 - [一键添加SSH密钥](#1) &nbsp;&nbsp;&nbsp;&nbsp;
 - [将用户添加到 sudo 组里方便使用 sudo -i](#2) &nbsp;&nbsp;&nbsp;&nbsp;
 - [BBR开启网络优化一键脚本](#3) &nbsp;&nbsp;&nbsp;&nbsp;
+- [一键安装 node_pm2](#4) &nbsp;&nbsp;&nbsp;&nbsp;
 
 <hr style="border: none; height: 1px; background-color: green;">
 
@@ -83,3 +84,17 @@ bash <(wget -qO- https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/enable-bbr
 ```
 
 </details>
+
+
+</details>
+<hr style="border: none; height: 1px; background-color: green;">
+<details>  
+<summary>一键安装 node_pm2</summary> 
+<a name="4"></a>
+  
+```
+bash <(wget -qO- https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/install_node_pm2.sh)
+```
+
+</details>
+
