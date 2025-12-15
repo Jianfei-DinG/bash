@@ -47,11 +47,11 @@ id_rsa.pub（公钥-服务端）
 <a name="1"></a>
   
 ```
-sh <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_installer.sh)
+sh <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_installer.sh)
 ```
 
 ```
-bash <(curl -Ls https:///cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_installer.sh)
+bash <(curl -Ls https:///testingcf.jsdelivr.net/gh/Jianfei-DinG/bash/script/ssh_key_installer.sh)
 ```
 Ubuntu / Debian 安装 sudo 和 curl
 ```
@@ -80,7 +80,7 @@ sudo usermod -aG sudo "$(whoami)"
 <a name="3"></a>
   
 ```
-bash <(wget -qO- https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/enable-bbr.sh)
+bash <(wget -qO- https://testingcf.jsdelivr.net/gh/Jianfei-DinG/bash/script/enable-bbr.sh)
 ```
 
 </details>
@@ -93,7 +93,7 @@ bash <(wget -qO- https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/enable-bbr
 <a name="4"></a>
   
 ```
-bash <(wget -qO- https://cdn.jsdelivr.net/gh/Jianfei-DinG/bash/script/install_node_pm2.sh)
+bash <(wget -qO- https://testingcf.jsdelivr.net/gh/Jianfei-DinG/bash/script/install_node_pm2.sh)
 ```
 
 </details>
